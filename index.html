@@ -6,1660 +6,662 @@
 <title>Amburgey Daily Briefing</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Playfair+Display:wght@700;900&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
 <style>
-/* ═══════════════════════════════════════════
+/* ═══════════════════════════════════
    MODULE: THEME
-   Toggle between light (paper) and dark (slate)
-═══════════════════════════════════════════ */
+═══════════════════════════════════ */
 :root {
-  --bg:         #f4f0e8;
-  --bg2:        #ede8df;
-  --bg3:        #e4ddd0;
-  --surface:    #faf8f3;
-  --ink:        #1c1a17;
-  --ink2:       #3d3a34;
-  --ink3:       #6b6660;
-  --rule:       #cec8bc;
-  --rule2:      #b8b0a2;
-  --accent:     #8b5e2a;
-  --accent2:    #c49a5a;
-  --red:        #7a2a2a;
-  --red-bg:     #f5edec;
-  --green:      #2a5c38;
-  --green-bg:   #ebf2ed;
-  --amber:      #7a5a1a;
-  --amber-bg:   #faf2e0;
-  --blue:       #1e3f6b;
-  --blue-bg:    #e8eef6;
-  --slate:      #4a5568;
-  --shadow:     rgba(0,0,0,0.08);
-  --font-display: 'Playfair Display', Georgia, serif;
-  --font-body:    'Lora', Georgia, serif;
-  --font-mono:    'DM Mono', 'Courier New', monospace;
+  --bg:#f4f0e8;--bg2:#ede8df;--bg3:#e4ddd0;--surface:#faf8f3;
+  --ink:#1c1a17;--ink2:#3d3a34;--ink3:#6b6660;
+  --rule:#cec8bc;--rule2:#b8b0a2;
+  --accent:#8b5e2a;--accent2:#c49a5a;
+  --red:#7a2a2a;--red-bg:#f5edec;
+  --green:#2a5c38;--green-bg:#ebf2ed;
+  --amber:#7a5a1a;--amber-bg:#faf2e0;
+  --blue:#1e3f6b;--blue-bg:#e8eef6;
+  --shadow:rgba(0,0,0,0.08);
+  --font-d:'Playfair Display',Georgia,serif;
+  --font-b:'Lora',Georgia,serif;
+  --font-m:'DM Mono','Courier New',monospace;
 }
-[data-theme="dark"] {
-  --bg:         #2a2d33;
-  --bg2:        #232629;
-  --bg3:        #1e2023;
-  --surface:    #31353d;
-  --ink:        #e8e4dc;
-  --ink2:       #c4bfb6;
-  --ink3:       #8a8680;
-  --rule:       #3e4248;
-  --rule2:      #4a5060;
-  --accent:     #c49a5a;
-  --accent2:    #8b5e2a;
-  --red:        #e07070;
-  --red-bg:     #2e2020;
-  --green:      #6abf80;
-  --green-bg:   #1a2e20;
-  --amber:      #e0b860;
-  --amber-bg:   #2e2810;
-  --blue:       #7aaad4;
-  --blue-bg:    #18222e;
-  --shadow:     rgba(0,0,0,0.3);
+[data-theme="dark"]{
+  --bg:#2a2d33;--bg2:#232629;--bg3:#1e2023;--surface:#31353d;
+  --ink:#e8e4dc;--ink2:#c4bfb6;--ink3:#8a8680;
+  --rule:#3e4248;--rule2:#4a5060;
+  --accent:#c49a5a;--accent2:#8b5e2a;
+  --red:#e07070;--red-bg:#2e2020;
+  --green:#6abf80;--green-bg:#1a2e20;
+  --amber:#e0b860;--amber-bg:#2e2810;
+  --blue:#7aaad4;--blue-bg:#18222e;
+  --shadow:rgba(0,0,0,0.3);
 }
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--font-b);background:var(--bg);color:var(--ink);min-height:100vh;font-size:15px;line-height:1.6;transition:background .25s,color .25s}
+a{color:var(--accent);text-decoration:none}
+button{cursor:pointer;font-family:var(--font-m)}
+input,textarea,select{font-family:var(--font-b);background:var(--surface);color:var(--ink);border:1px solid var(--rule2);border-radius:4px;padding:6px 10px;font-size:13px;transition:border .15s}
+input:focus,textarea:focus,select:focus{outline:none;border-color:var(--accent)}
 
-/* ═══════════════════════════════════════════
-   BASE
-═══════════════════════════════════════════ */
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
-body {
-  font-family: var(--font-body);
-  background: var(--bg);
-  color: var(--ink);
-  min-height: 100vh;
-  font-size: 15px;
-  line-height: 1.6;
-  transition: background 0.25s, color 0.25s;
-}
-a { color: var(--accent); text-decoration: none; }
-a:hover { text-decoration: underline; }
-button { cursor: pointer; font-family: var(--font-mono); }
-input, textarea, select {
-  font-family: var(--font-body);
-  background: var(--surface);
-  color: var(--ink);
-  border: 1px solid var(--rule2);
-  border-radius: 4px;
-  padding: 6px 10px;
-  font-size: 13px;
-  transition: border 0.15s;
-}
-input:focus, textarea:focus, select:focus {
-  outline: none;
-  border-color: var(--accent);
-}
+/* ═══════════════════════════════════
+   MODULE: MASTHEAD
+═══════════════════════════════════ */
+.masthead{background:var(--bg2);border-bottom:2px solid var(--ink);padding:0 40px;display:flex;align-items:stretch;justify-content:space-between}
+.masthead-brand{padding:20px 0;flex:1}
+.eyebrow{font-family:var(--font-m);font-size:9px;letter-spacing:.25em;text-transform:uppercase;color:var(--ink3);margin-bottom:4px}
+.masthead-title{font-family:var(--font-d);font-size:34px;font-weight:900;line-height:1;color:var(--ink);letter-spacing:-.02em}
+.masthead-sub{font-family:var(--font-m);font-size:10px;color:var(--ink3);margin-top:5px;letter-spacing:.08em}
+.masthead-controls{display:flex;align-items:center;gap:10px;padding:20px 0 20px 28px;border-left:1px solid var(--rule)}
+.ctrl-btn{background:none;border:1px solid var(--rule2);color:var(--ink3);padding:7px 13px;font-size:11px;letter-spacing:.1em;text-transform:uppercase;border-radius:3px;transition:all .15s;text-decoration:none;display:inline-flex;align-items:center}
+.ctrl-btn:hover{border-color:var(--accent);color:var(--accent)}
 
-/* ═══════════════════════════════════════════
-   MODULE: LAYOUT - MASTHEAD
-═══════════════════════════════════════════ */
-.masthead {
-  background: var(--bg2);
-  border-bottom: 2px solid var(--ink);
-  padding: 0 40px;
-  display: flex;
-  align-items: stretch;
-  justify-content: space-between;
-  gap: 0;
-}
-.masthead-brand {
-  padding: 22px 0;
-  flex: 1;
-}
-.masthead-eyebrow {
-  font-family: var(--font-mono);
-  font-size: 9px;
-  letter-spacing: 0.25em;
-  text-transform: uppercase;
-  color: var(--ink3);
-  margin-bottom: 4px;
-}
-.masthead-title {
-  font-family: var(--font-display);
-  font-size: 36px;
-  font-weight: 900;
-  line-height: 1;
-  color: var(--ink);
-  letter-spacing: -0.02em;
-}
-.masthead-sub {
-  font-family: var(--font-mono);
-  font-size: 10px;
-  color: var(--ink3);
-  margin-top: 5px;
-  letter-spacing: 0.08em;
-}
-.masthead-controls {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 22px 0 22px 32px;
-  border-left: 1px solid var(--rule);
-}
-.theme-btn {
-  background: none;
-  border: 1px solid var(--rule2);
-  color: var(--ink3);
-  padding: 7px 14px;
-  font-size: 11px;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  border-radius: 3px;
-  transition: all 0.15s;
-}
-.theme-btn:hover { border-color: var(--accent); color: var(--accent); }
+/* ═══════════════════════════════════
+   MODULE: COMMAND BAR
+═══════════════════════════════════ */
+.cmd-bar{background:var(--surface);border-bottom:1px solid var(--rule);padding:14px 40px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;position:sticky;top:0;z-index:100;box-shadow:0 2px 8px var(--shadow)}
+.cmd-left{display:flex;align-items:center;gap:12px}
+.run-btn{background:var(--ink);color:var(--bg);border:none;padding:11px 26px;font-size:12px;letter-spacing:.15em;text-transform:uppercase;border-radius:3px;transition:background .15s,transform .08s;display:flex;align-items:center;gap:8px}
+.run-btn:hover{background:var(--ink2)}
+.run-btn:active{transform:scale(.98)}
+.run-btn.running{background:var(--accent)}
+.sweep-meta{font-family:var(--font-m);font-size:11px;color:var(--ink3)}
+.badges{display:flex;gap:8px}
+.badge{font-family:var(--font-m);font-size:11px;padding:4px 10px;border-radius:20px;font-weight:500}
+.badge-r{background:var(--red-bg);color:var(--red)}
+.badge-a{background:var(--amber-bg);color:var(--amber)}
+.badge-b{background:var(--blue-bg);color:var(--blue)}
 
-/* ═══════════════════════════════════════════
-   MODULE: LAYOUT - SETUP BANNER
-═══════════════════════════════════════════ */
-.setup-banner {
-  background: var(--amber-bg);
-  border-bottom: 1px solid var(--amber);
-  padding: 14px 40px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  flex-wrap: wrap;
-}
-.setup-banner p {
-  font-family: var(--font-mono);
-  font-size: 12px;
-  color: var(--amber);
-}
-.setup-banner a {
-  color: var(--amber);
-  font-weight: 600;
-  text-decoration: underline;
-}
-.setup-link-btn {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  background: var(--amber);
-  color: white;
-  border: none;
-  padding: 8px 16px;
-  border-radius: 3px;
-  white-space: nowrap;
-}
+/* ═══════════════════════════════════
+   MODULE: MAIN
+═══════════════════════════════════ */
+.main{max-width:1100px;margin:0 auto;padding:28px 40px 80px}
+.prog-wrap{margin-bottom:20px;display:none}
+.prog-wrap.on{display:block}
+.prog-bar{height:3px;background:var(--rule);border-radius:2px;overflow:hidden}
+.prog-fill{height:100%;background:var(--accent);width:0%;transition:width .5s ease;border-radius:2px}
+.prog-label{font-family:var(--font-m);font-size:11px;color:var(--ink3);text-align:center;margin-top:6px}
+.empty{text-align:center;padding:80px 40px}
+.empty-icon{font-size:44px;opacity:.25;margin-bottom:14px}
+.empty h2{font-family:var(--font-d);font-size:26px;font-weight:700;margin-bottom:6px}
+.empty p{font-family:var(--font-m);font-size:12px;color:var(--ink3);letter-spacing:.04em;max-width:400px;margin:0 auto;line-height:1.8}
+.warn-box{background:var(--amber-bg);border:1px solid var(--amber);border-radius:6px;padding:14px 20px;margin-bottom:20px;font-family:var(--font-m);font-size:12px;color:var(--amber);display:none}
+.warn-box.on{display:block}
 
-/* ═══════════════════════════════════════════
-   MODULE: LAYOUT - COMMAND BAR
-═══════════════════════════════════════════ */
-.command-bar {
-  background: var(--surface);
-  border-bottom: 1px solid var(--rule);
-  padding: 16px 40px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 20px;
-  flex-wrap: wrap;
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  box-shadow: 0 2px 8px var(--shadow);
-}
-.command-left {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-.run-btn {
-  background: var(--ink);
-  color: var(--bg);
-  border: none;
-  padding: 11px 28px;
-  font-size: 12px;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  border-radius: 3px;
-  transition: background 0.15s, transform 0.08s;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-.run-btn:hover { background: var(--ink2); }
-.run-btn:active { transform: scale(0.98); }
-.run-btn.running { background: var(--accent); }
-.run-btn svg { width: 14px; height: 14px; }
-.sweep-meta {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  color: var(--ink3);
-}
-.sweep-meta strong { color: var(--ink2); }
-.command-right {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-.badge-summary {
-  display: flex;
-  gap: 8px;
-}
-.badge {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  padding: 4px 10px;
-  border-radius: 20px;
-  font-weight: 500;
-}
-.badge-red    { background: var(--red-bg);   color: var(--red);   }
-.badge-amber  { background: var(--amber-bg); color: var(--amber); }
-.badge-green  { background: var(--green-bg); color: var(--green); }
-.badge-blue   { background: var(--blue-bg);  color: var(--blue);  }
+/* ═══════════════════════════════════
+   MODULE: SECTIONS
+═══════════════════════════════════ */
+.section{margin-bottom:28px;border:1px solid var(--rule);border-radius:6px;overflow:hidden;background:var(--surface)}
+.sec-hdr{padding:13px 20px;display:flex;align-items:center;justify-content:space-between;gap:10px;cursor:pointer;user-select:none;border-bottom:1px solid var(--rule);background:var(--bg2);transition:background .15s}
+.sec-hdr:hover{background:var(--bg3)}
+.sec-hdr-l{display:flex;align-items:center;gap:10px}
+.sec-lbl{font-family:var(--font-m);font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink3)}
+.sec-title{font-family:var(--font-d);font-size:17px;font-weight:700;color:var(--ink)}
+.sec-cnt{font-family:var(--font-m);font-size:11px;background:var(--bg3);color:var(--ink3);padding:2px 8px;border-radius:10px;border:1px solid var(--rule)}
+.sec-cnt.on{background:var(--accent2);color:#fff;border-color:var(--accent)}
+.sec-tog{font-size:15px;color:var(--ink3);transition:transform .2s}
+.section.collapsed .sec-tog{transform:rotate(-90deg)}
+.section.collapsed .sec-body{display:none}
+.empty-sec{padding:16px 20px;color:var(--ink3);font-family:var(--font-m);font-size:12px}
 
-/* ═══════════════════════════════════════════
-   MODULE: LAYOUT - MAIN CONTENT
-═══════════════════════════════════════════ */
-.main {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 32px 40px 80px;
-}
-.progress-bar {
-  height: 3px;
-  background: var(--rule);
-  border-radius: 2px;
-  margin-bottom: 28px;
-  overflow: hidden;
-  display: none;
-}
-.progress-bar.active { display: block; }
-.progress-fill {
-  height: 100%;
-  background: var(--accent);
-  width: 0%;
-  transition: width 0.4s ease;
-  border-radius: 2px;
-}
-.progress-label {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  color: var(--ink3);
-  text-align: center;
-  margin-bottom: 20px;
-  display: none;
-}
-.progress-label.active { display: block; }
+/* ═══════════════════════════════════
+   MODULE: ACTION ITEMS
+═══════════════════════════════════ */
+.act-item{display:flex;align-items:flex-start;gap:13px;padding:14px 20px;border-bottom:1px solid var(--rule);transition:background .15s}
+.act-item:last-child{border-bottom:none}
+.act-item:hover{background:var(--bg)}
+.act-item.done{opacity:.45}
+.act-item.done .act-text{text-decoration:line-through}
+.pri-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;margin-top:5px}
+.pri-h{background:var(--red)}.pri-m{background:var(--amber)}.pri-l{background:var(--green)}
+.chk{width:18px;height:18px;border:2px solid var(--rule2);border-radius:3px;flex-shrink:0;margin-top:2px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .15s;background:var(--surface)}
+.chk.on{background:var(--green);border-color:var(--green);color:#fff}
+.chk.on::after{content:'✓';font-size:11px}
+.act-content{flex:1;min-width:0}
+.act-text{font-size:14px;color:var(--ink);margin-bottom:4px;line-height:1.5}
+.act-meta{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.tag{font-family:var(--font-m);font-size:10px;padding:2px 7px;border-radius:3px;letter-spacing:.04em}
+.tag-job{background:var(--blue-bg);color:var(--blue)}
+.tag-admin{background:var(--green-bg);color:var(--green)}
+.tag-field{background:var(--red-bg);color:var(--red)}
+.tag-est{background:var(--amber-bg);color:var(--amber)}
+.tag-bk{background:var(--bg3);color:var(--ink3)}
+.act-btns{display:flex;gap:6px;flex-shrink:0}
+.btn-sm{font-family:var(--font-m);font-size:10px;letter-spacing:.08em;text-transform:uppercase;padding:5px 10px;border-radius:3px;border:1px solid var(--rule2);background:var(--surface);color:var(--ink3);transition:all .15s;white-space:nowrap}
+.btn-sm:hover{border-color:var(--accent);color:var(--accent)}
+.btn-draft{border-color:var(--blue);color:var(--blue)}
+.btn-draft:hover{background:var(--blue-bg)}
 
-/* ═══════════════════════════════════════════
-   MODULE: LAYOUT - EMPTY STATE
-═══════════════════════════════════════════ */
-.empty-state {
-  text-align: center;
-  padding: 80px 40px;
-}
-.empty-state-icon {
-  font-size: 48px;
-  margin-bottom: 16px;
-  opacity: 0.3;
-}
-.empty-state h2 {
-  font-family: var(--font-display);
-  font-size: 28px;
-  font-weight: 700;
-  color: var(--ink);
-  margin-bottom: 8px;
-}
-.empty-state p {
-  font-family: var(--font-mono);
-  font-size: 12px;
-  color: var(--ink3);
-  letter-spacing: 0.05em;
-  max-width: 400px;
-  margin: 0 auto;
-}
+/* ═══════════════════════════════════
+   MODULE: BID INVITES
+═══════════════════════════════════ */
+.bid-card{padding:16px 20px;border-bottom:1px solid var(--rule);transition:background .15s}
+.bid-card:last-child{border-bottom:none}
+.bid-card:hover{background:var(--bg)}
+.bid-card.following{border-left:3px solid var(--green)}
+.bid-hdr{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;margin-bottom:8px}
+.bid-title{font-family:var(--font-d);font-size:16px;font-weight:700;color:var(--ink);line-height:1.3}
+.dl{font-family:var(--font-m);font-size:11px;padding:3px 9px;border-radius:3px;white-space:nowrap;flex-shrink:0}
+.dl-urg{background:var(--red-bg);color:var(--red);border:1px solid var(--red)}
+.dl-soon{background:var(--amber-bg);color:var(--amber);border:1px solid var(--amber)}
+.dl-ok{background:var(--green-bg);color:var(--green);border:1px solid var(--green)}
+.dl-unk{background:var(--bg3);color:var(--ink3);border:1px solid var(--rule2)}
+.bid-meta{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:8px}
+.bid-mi{font-family:var(--font-m);font-size:11px;color:var(--ink3);display:flex;align-items:center;gap:4px}
+.bid-mi strong{color:var(--ink2)}
+.gc-link{color:var(--accent);text-decoration:underline;cursor:pointer;background:none;border:none;font-family:var(--font-m);font-size:11px;padding:0}
+.scope-notes{margin-bottom:8px}
+.scope-notes textarea{width:100%;resize:vertical;min-height:46px;font-size:12px;border-color:var(--rule)}
+.bid-acts{display:flex;align-items:center;gap:7px;flex-wrap:wrap}
+.btn-follow{background:var(--green-bg);color:var(--green);border:1px solid var(--green)}
+.btn-follow:hover,.btn-follow.on{background:var(--green);color:#fff}
+.btn-nobid{background:var(--red-bg);color:var(--red);border:1px solid var(--red)}
+.btn-nobid:hover{background:var(--red);color:#fff}
+.nbr{font-family:var(--font-m);font-size:11px;padding:5px 8px;border:1px solid var(--rule2);border-radius:3px;background:var(--surface);color:var(--ink);display:none}
+.nbr.on{display:block}
 
-/* ═══════════════════════════════════════════
-   MODULE: SECTIONS - SHARED
-═══════════════════════════════════════════ */
-.section {
-  margin-bottom: 32px;
-  border: 1px solid var(--rule);
-  border-radius: 6px;
-  overflow: hidden;
-  background: var(--surface);
-}
-.section-header {
-  padding: 14px 20px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  cursor: pointer;
-  user-select: none;
-  border-bottom: 1px solid var(--rule);
-  background: var(--bg2);
-  transition: background 0.15s;
-}
-.section-header:hover { background: var(--bg3); }
-.section-header-left {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-.section-label {
-  font-family: var(--font-mono);
-  font-size: 10px;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--ink3);
-}
-.section-title {
-  font-family: var(--font-display);
-  font-size: 17px;
-  font-weight: 700;
-  color: var(--ink);
-}
-.section-count {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  background: var(--bg3);
-  color: var(--ink3);
-  padding: 2px 8px;
-  border-radius: 10px;
-  border: 1px solid var(--rule);
-}
-.section-count.has-items { background: var(--accent2); color: white; border-color: var(--accent); }
-.section-toggle {
-  font-family: var(--font-mono);
-  font-size: 16px;
-  color: var(--ink3);
-  line-height: 1;
-  transition: transform 0.2s;
-}
-.section.collapsed .section-toggle { transform: rotate(-90deg); }
-.section-body { padding: 0; }
-.section.collapsed .section-body { display: none; }
+/* ═══════════════════════════════════
+   MODULE: AMENDMENTS / MATERIALS / FLAGS
+═══════════════════════════════════ */
+.amd-item{padding:13px 20px;border-bottom:1px solid var(--rule);display:flex;gap:12px;align-items:flex-start}
+.amd-item:last-child{border-bottom:none}
+.amd-dot{width:9px;height:9px;background:var(--amber);border-radius:50%;flex-shrink:0;margin-top:5px}
+.amd-content{flex:1}
+.amd-title{font-size:14px;font-weight:600;color:var(--ink);margin-bottom:2px}
+.amd-detail{font-family:var(--font-m);font-size:11px;color:var(--ink3)}
+.btn-seen{background:var(--amber-bg);color:var(--amber);border:1px solid var(--amber)}
+.btn-seen:hover{background:var(--amber);color:#fff}
+.mat-item{padding:13px 20px;border-bottom:1px solid var(--rule);display:flex;gap:11px;align-items:flex-start}
+.mat-item:last-child{border-bottom:none}
+.mat-icon{font-size:16px;flex-shrink:0;margin-top:1px}
+.mat-content{flex:1}
+.mat-text{font-size:14px;color:var(--ink);margin-bottom:2px}
+.mat-meta{font-family:var(--font-m);font-size:11px;color:var(--ink3)}
+.flag-item{padding:13px 20px;border-bottom:1px solid var(--rule);display:flex;gap:12px;align-items:flex-start}
+.flag-item:last-child{border-bottom:none}
+.flag-bar{width:4px;border-radius:2px;background:var(--blue);flex-shrink:0;align-self:stretch;min-height:36px}
+.flag-content{flex:1}
+.flag-job{font-family:var(--font-m);font-size:11px;color:var(--blue);margin-bottom:2px}
+.flag-text{font-size:14px;color:var(--ink);margin-bottom:2px}
+.flag-sug{font-size:12px;color:var(--ink3);font-style:italic;margin-bottom:5px}
+.flag-acts{display:flex;gap:6px}
+.btn-apply{background:var(--blue-bg);color:var(--blue);border:1px solid var(--blue)}
+.btn-apply:hover{background:var(--blue);color:#fff}
+.btn-ack{background:var(--bg2);color:var(--ink3);border:1px solid var(--rule2)}
+.noise-list{padding:10px 20px;display:flex;flex-direction:column;gap:3px}
+.noise-item{font-family:var(--font-m);font-size:11px;color:var(--ink3);padding:2px 0;display:flex;gap:8px}
+.noise-from{color:var(--ink2);font-weight:500;min-width:150px;flex-shrink:0}
 
-/* ═══════════════════════════════════════════
-   MODULE: SECTIONS - ACTION ITEMS
-═══════════════════════════════════════════ */
-.action-item {
-  display: flex;
-  align-items: flex-start;
-  gap: 14px;
-  padding: 16px 20px;
-  border-bottom: 1px solid var(--rule);
-  transition: background 0.15s;
-}
-.action-item:last-child { border-bottom: none; }
-.action-item:hover { background: var(--bg); }
-.action-item.completed { opacity: 0.5; }
-.action-item.completed .action-text { text-decoration: line-through; }
-.action-checkbox {
-  width: 18px;
-  height: 18px;
-  border: 2px solid var(--rule2);
-  border-radius: 3px;
-  flex-shrink: 0;
-  margin-top: 2px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.15s;
-  background: var(--surface);
-}
-.action-checkbox.checked {
-  background: var(--green);
-  border-color: var(--green);
-  color: white;
-}
-.action-checkbox.checked::after { content: '✓'; font-size: 11px; }
-.action-content { flex: 1; min-width: 0; }
-.action-text {
-  font-size: 14px;
-  color: var(--ink);
-  margin-bottom: 4px;
-  line-height: 1.5;
-}
-.action-meta {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  flex-wrap: wrap;
-}
-.action-tag {
-  font-family: var(--font-mono);
-  font-size: 10px;
-  padding: 2px 7px;
-  border-radius: 3px;
-  letter-spacing: 0.05em;
-}
-.tag-job     { background: var(--blue-bg);  color: var(--blue);  }
-.tag-bid     { background: var(--amber-bg); color: var(--amber); }
-.tag-admin   { background: var(--green-bg); color: var(--green); }
-.tag-field   { background: var(--red-bg);   color: var(--red);   }
-.priority-dot {
-  width: 8px; height: 8px;
-  border-radius: 50%;
-  flex-shrink: 0;
-  margin-top: 6px;
-}
-.priority-high   { background: var(--red); }
-.priority-medium { background: var(--amber); }
-.priority-low    { background: var(--green); }
-.action-buttons {
-  display: flex;
-  gap: 6px;
-  flex-shrink: 0;
-}
-.btn-sm {
-  font-family: var(--font-mono);
-  font-size: 10px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  padding: 5px 10px;
-  border-radius: 3px;
-  border: 1px solid var(--rule2);
-  background: var(--surface);
-  color: var(--ink3);
-  transition: all 0.15s;
-  white-space: nowrap;
-}
-.btn-sm:hover { border-color: var(--accent); color: var(--accent); }
-.btn-draft { border-color: var(--blue); color: var(--blue); }
-.btn-draft:hover { background: var(--blue-bg); }
+/* ═══════════════════════════════════
+   MODULE: MODALS
+═══════════════════════════════════ */
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:1000;display:none;align-items:center;justify-content:center;padding:18px}
+.overlay.on{display:flex}
+.modal{background:var(--surface);border:1px solid var(--rule);border-radius:8px;width:100%;max-width:520px;max-height:88vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,.3)}
+.modal-lg{max-width:620px}
+.modal-hdr{padding:18px 22px 14px;border-bottom:1px solid var(--rule);display:flex;justify-content:space-between;align-items:flex-start}
+.modal-co{font-family:var(--font-m);font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);margin-bottom:3px}
+.modal-name{font-family:var(--font-d);font-size:20px;font-weight:700;color:var(--ink)}
+.modal-role{font-family:var(--font-m);font-size:11px;color:var(--ink3);margin-top:2px}
+.modal-x{background:none;border:none;font-size:18px;color:var(--ink3);padding:0 3px;line-height:1}
+.modal-x:hover{color:var(--ink)}
+.modal-body{padding:18px 22px}
+.mc-row{display:flex;gap:9px;margin-bottom:7px;align-items:baseline}
+.mc-lbl{font-family:var(--font-m);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);min-width:46px}
+.mc-val{font-size:13px;color:var(--ink)}
+.mdiv{border:none;border-top:1px solid var(--rule);margin:14px 0}
+.msec{font-family:var(--font-m);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink3);margin-bottom:9px}
+.mpr{display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:1px solid var(--rule);gap:10px}
+.mpr:last-child{border-bottom:none}
+.mpr-name{font-size:13px;color:var(--ink);flex:1}
+.mpr-badge{font-family:var(--font-m);font-size:10px;padding:2px 7px;border-radius:10px}
+.modal-notes{width:100%;resize:vertical;min-height:58px;font-size:12px;margin-top:5px}
+.modal-save{margin-top:7px;background:var(--ink);color:var(--bg);border:none;padding:8px 18px;font-size:11px;letter-spacing:.1em;text-transform:uppercase;border-radius:3px}
+.modal-save:hover{background:var(--ink2)}
 
-/* ═══════════════════════════════════════════
-   MODULE: SECTIONS - BID INVITES
-═══════════════════════════════════════════ */
-.bid-card {
-  padding: 18px 20px;
-  border-bottom: 1px solid var(--rule);
-  transition: background 0.15s;
-}
-.bid-card:last-child { border-bottom: none; }
-.bid-card:hover { background: var(--bg); }
-.bid-card.following { border-left: 3px solid var(--green); }
-.bid-card.no-bid { opacity: 0.5; }
-.bid-header {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 16px;
-  margin-bottom: 10px;
-}
-.bid-title {
-  font-family: var(--font-display);
-  font-size: 16px;
-  font-weight: 700;
-  color: var(--ink);
-  line-height: 1.3;
-}
-.bid-deadline {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  padding: 4px 10px;
-  border-radius: 3px;
-  white-space: nowrap;
-  flex-shrink: 0;
-}
-.deadline-urgent  { background: var(--red-bg);   color: var(--red);   border: 1px solid var(--red); }
-.deadline-soon    { background: var(--amber-bg);  color: var(--amber); border: 1px solid var(--amber); }
-.deadline-ok      { background: var(--green-bg);  color: var(--green); border: 1px solid var(--green); }
-.deadline-unknown { background: var(--bg3);       color: var(--ink3);  border: 1px solid var(--rule2); }
-.bid-meta {
-  display: flex;
-  gap: 16px;
-  flex-wrap: wrap;
-  margin-bottom: 10px;
-}
-.bid-meta-item {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  color: var(--ink3);
-  display: flex;
-  align-items: center;
-  gap: 4px;
-}
-.bid-meta-item strong { color: var(--ink2); }
-.bid-gc-btn {
-  color: var(--accent);
-  text-decoration: underline;
-  cursor: pointer;
-  background: none;
-  border: none;
-  font-family: var(--font-mono);
-  font-size: 11px;
-  padding: 0;
-}
-.bid-scope-notes {
-  margin-bottom: 10px;
-}
-.bid-scope-notes textarea {
-  width: 100%;
-  resize: vertical;
-  min-height: 50px;
-  font-size: 12px;
-  border-color: var(--rule);
-}
-.bid-actions {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  flex-wrap: wrap;
-}
-.btn-follow {
-  background: var(--green-bg);
-  color: var(--green);
-  border: 1px solid var(--green);
-}
-.btn-follow:hover { background: var(--green); color: white; }
-.btn-follow.active { background: var(--green); color: white; }
-.btn-nobid {
-  background: var(--red-bg);
-  color: var(--red);
-  border: 1px solid var(--red);
-}
-.btn-nobid:hover { background: var(--red); color: white; }
-.nobid-reason {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  padding: 5px 8px;
-  border: 1px solid var(--rule2);
-  border-radius: 3px;
-  background: var(--surface);
-  color: var(--ink);
-  display: none;
-}
-.nobid-reason.visible { display: block; }
+/* Draft modal */
+.draft-field{margin-bottom:10px}
+.draft-field label{font-family:var(--font-m);font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--ink3);display:block;margin-bottom:3px}
+.draft-field input{width:100%}
+.draft-field textarea{width:100%;resize:vertical;min-height:130px;font-size:13px;line-height:1.6}
+.draft-acts{padding:12px 22px;border-top:1px solid var(--rule);display:flex;gap:7px;justify-content:flex-end;background:var(--bg2)}
+.btn-copy{background:var(--surface);color:var(--ink2);border:1px solid var(--rule2);padding:8px 16px;font-size:11px;letter-spacing:.08em;text-transform:uppercase;border-radius:3px}
+.btn-copy:hover{border-color:var(--accent);color:var(--accent)}
+.btn-gmail{background:var(--ink);color:var(--bg);border:none;padding:8px 16px;font-size:11px;letter-spacing:.08em;text-transform:uppercase;border-radius:3px}
+.btn-gmail:hover{background:var(--ink2)}
 
-/* ═══════════════════════════════════════════
-   MODULE: SECTIONS - AMENDMENTS
-═══════════════════════════════════════════ */
-.amendment-item {
-  padding: 14px 20px;
-  border-bottom: 1px solid var(--rule);
-  display: flex;
-  gap: 14px;
-  align-items: flex-start;
-}
-.amendment-item:last-child { border-bottom: none; }
-.amendment-dot {
-  width: 10px; height: 10px;
-  background: var(--amber);
-  border-radius: 50%;
-  flex-shrink: 0;
-  margin-top: 5px;
-}
-.amendment-content { flex: 1; }
-.amendment-title { font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 3px; }
-.amendment-detail { font-family: var(--font-mono); font-size: 11px; color: var(--ink3); }
-.amendment-actions { display: flex; gap: 6px; flex-shrink: 0; }
-.btn-seen {
-  background: var(--amber-bg);
-  color: var(--amber);
-  border: 1px solid var(--amber);
-}
-.btn-seen:hover { background: var(--amber); color: white; }
+/* Setup modal */
+.setup-step{padding:16px 22px;border-bottom:1px solid var(--rule)}
+.setup-step:last-child{border-bottom:none}
+.setup-step-hdr{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.setup-step-num{width:24px;height:24px;background:var(--accent);color:#fff;border-radius:50%;font-family:var(--font-m);font-size:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.setup-step-title{font-family:var(--font-d);font-size:16px;font-weight:700;color:var(--ink)}
+.setup-step p{font-size:13px;color:var(--ink3);margin-bottom:8px;line-height:1.6}
+.setup-step input{width:100%;margin-bottom:5px}
+.setup-footer{padding:14px 22px;background:var(--bg2);border-top:1px solid var(--rule);display:flex;justify-content:space-between;align-items:center}
+.setup-save{background:var(--ink);color:var(--bg);border:none;padding:10px 22px;font-size:12px;letter-spacing:.1em;text-transform:uppercase;border-radius:3px}
+.setup-save:hover{background:var(--ink2)}
 
-/* ═══════════════════════════════════════════
-   MODULE: SECTIONS - JOB TRACKER FLAGS
-═══════════════════════════════════════════ */
-.flag-item {
-  padding: 14px 20px;
-  border-bottom: 1px solid var(--rule);
-  display: flex;
-  gap: 14px;
-  align-items: flex-start;
-}
-.flag-item:last-child { border-bottom: none; }
-.flag-bar {
-  width: 4px;
-  border-radius: 2px;
-  background: var(--blue);
-  flex-shrink: 0;
-  align-self: stretch;
-  min-height: 40px;
-}
-.flag-content { flex: 1; }
-.flag-job { font-family: var(--font-mono); font-size: 11px; color: var(--blue); margin-bottom: 3px; }
-.flag-text { font-size: 14px; color: var(--ink); margin-bottom: 4px; }
-.flag-suggested {
-  font-size: 12px;
-  color: var(--ink3);
-  font-style: italic;
-  margin-bottom: 6px;
-}
-.flag-actions { display: flex; gap: 6px; }
-.btn-apply {
-  background: var(--blue-bg);
-  color: var(--blue);
-  border: 1px solid var(--blue);
-}
-.btn-apply:hover { background: var(--blue); color: white; }
-.btn-ack {
-  background: var(--bg2);
-  color: var(--ink3);
-  border: 1px solid var(--rule2);
-}
-
-/* ═══════════════════════════════════════════
-   MODULE: SECTIONS - MATERIALS FLAGS
-═══════════════════════════════════════════ */
-.material-item {
-  padding: 14px 20px;
-  border-bottom: 1px solid var(--rule);
-  display: flex;
-  gap: 12px;
-  align-items: flex-start;
-}
-.material-item:last-child { border-bottom: none; }
-.material-icon {
-  font-size: 16px;
-  flex-shrink: 0;
-  margin-top: 1px;
-}
-.material-content { flex: 1; }
-.material-text { font-size: 14px; color: var(--ink); margin-bottom: 3px; }
-.material-meta { font-family: var(--font-mono); font-size: 11px; color: var(--ink3); }
-
-/* ═══════════════════════════════════════════
-   MODULE: SECTIONS - NOISE / COLLAPSED
-═══════════════════════════════════════════ */
-.noise-list {
-  padding: 12px 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-.noise-item {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  color: var(--ink3);
-  padding: 3px 0;
-  display: flex;
-  gap: 8px;
-  align-items: baseline;
-}
-.noise-from { color: var(--ink2); font-weight: 500; min-width: 160px; flex-shrink: 0; }
-
-/* ═══════════════════════════════════════════
-   MODULE: GC CONTACT CARD (MODAL)
-═══════════════════════════════════════════ */
-.modal-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.5);
-  z-index: 1000;
-  display: none;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-}
-.modal-overlay.open { display: flex; }
-.modal {
-  background: var(--surface);
-  border: 1px solid var(--rule);
-  border-radius: 8px;
-  width: 100%;
-  max-width: 560px;
-  max-height: 85vh;
-  overflow-y: auto;
-  box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-}
-.modal-header {
-  padding: 20px 24px 16px;
-  border-bottom: 1px solid var(--rule);
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-}
-.modal-company {
-  font-family: var(--font-mono);
-  font-size: 10px;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: var(--accent);
-  margin-bottom: 4px;
-}
-.modal-name {
-  font-family: var(--font-display);
-  font-size: 22px;
-  font-weight: 700;
-  color: var(--ink);
-}
-.modal-role {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  color: var(--ink3);
-  margin-top: 3px;
-}
-.modal-close {
-  background: none;
-  border: none;
-  font-size: 20px;
-  color: var(--ink3);
-  padding: 0 4px;
-  line-height: 1;
-}
-.modal-close:hover { color: var(--ink); }
-.modal-body { padding: 20px 24px; }
-.modal-contact-row {
-  display: flex;
-  gap: 10px;
-  margin-bottom: 8px;
-  align-items: center;
-}
-.modal-contact-label {
-  font-family: var(--font-mono);
-  font-size: 10px;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--ink3);
-  min-width: 50px;
-}
-.modal-contact-val {
-  font-size: 13px;
-  color: var(--ink);
-}
-.modal-divider {
-  border: none;
-  border-top: 1px solid var(--rule);
-  margin: 16px 0;
-}
-.modal-section-title {
-  font-family: var(--font-mono);
-  font-size: 10px;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--ink3);
-  margin-bottom: 10px;
-}
-.modal-project-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 8px 0;
-  border-bottom: 1px solid var(--rule);
-  gap: 12px;
-}
-.modal-project-row:last-child { border-bottom: none; }
-.modal-project-name { font-size: 13px; color: var(--ink); flex: 1; }
-.modal-project-status {
-  font-family: var(--font-mono);
-  font-size: 10px;
-  padding: 2px 7px;
-  border-radius: 10px;
-}
-.modal-recent-email {
-  font-size: 12px;
-  color: var(--ink3);
-  font-style: italic;
-  padding: 8px 12px;
-  background: var(--bg2);
-  border-radius: 4px;
-  border-left: 3px solid var(--rule2);
-}
-.modal-notes-area {
-  width: 100%;
-  resize: vertical;
-  min-height: 60px;
-  font-size: 12px;
-  margin-top: 6px;
-}
-.modal-save-btn {
-  margin-top: 8px;
-  background: var(--ink);
-  color: var(--bg);
-  border: none;
-  padding: 8px 20px;
-  font-size: 11px;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  border-radius: 3px;
-}
-.modal-save-btn:hover { background: var(--ink2); }
-
-/* ═══════════════════════════════════════════
-   MODULE: DRAFT MODAL
-═══════════════════════════════════════════ */
-.draft-modal .modal-body { padding: 0; }
-.draft-email-box {
-  padding: 20px 24px;
-}
-.draft-field { margin-bottom: 12px; }
-.draft-field label {
-  font-family: var(--font-mono);
-  font-size: 10px;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: var(--ink3);
-  display: block;
-  margin-bottom: 4px;
-}
-.draft-field input { width: 100%; }
-.draft-field textarea {
-  width: 100%;
-  resize: vertical;
-  min-height: 140px;
-  font-size: 13px;
-  line-height: 1.6;
-}
-.draft-actions {
-  padding: 14px 24px;
-  border-top: 1px solid var(--rule);
-  display: flex;
-  gap: 8px;
-  justify-content: flex-end;
-  background: var(--bg2);
-}
-.btn-copy {
-  background: var(--surface);
-  color: var(--ink2);
-  border: 1px solid var(--rule2);
-  padding: 8px 18px;
-  font-size: 11px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  border-radius: 3px;
-}
-.btn-copy:hover { border-color: var(--accent); color: var(--accent); }
-.btn-open-mail {
-  background: var(--ink);
-  color: var(--bg);
-  border: none;
-  padding: 8px 18px;
-  font-size: 11px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  border-radius: 3px;
-}
-.btn-open-mail:hover { background: var(--ink2); }
-
-/* ═══════════════════════════════════════════
-   MODULE: SETUP MODAL
-═══════════════════════════════════════════ */
-.setup-modal .modal { max-width: 680px; }
-.setup-step {
-  padding: 16px 24px;
-  border-bottom: 1px solid var(--rule);
-}
-.setup-step:last-child { border-bottom: none; }
-.setup-step-header {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 8px;
-}
-.setup-step-num {
-  width: 26px; height: 26px;
-  background: var(--accent);
-  color: white;
-  border-radius: 50%;
-  font-family: var(--font-mono);
-  font-size: 12px;
-  font-weight: 500;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-}
-.setup-step-title {
-  font-family: var(--font-display);
-  font-size: 16px;
-  font-weight: 700;
-  color: var(--ink);
-}
-.setup-step p {
-  font-size: 13px;
-  color: var(--ink3);
-  margin-bottom: 10px;
-  line-height: 1.6;
-}
-.setup-step input { width: 100%; margin-bottom: 6px; }
-.setup-step code {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  background: var(--bg3);
-  padding: 2px 6px;
-  border-radius: 3px;
-  color: var(--accent);
-}
-.setup-check {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-family: var(--font-mono);
-  font-size: 11px;
-  color: var(--green);
-  margin-top: 6px;
-}
-.setup-footer {
-  padding: 16px 24px;
-  background: var(--bg2);
-  border-top: 1px solid var(--rule);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.setup-save-btn {
-  background: var(--ink);
-  color: var(--bg);
-  border: none;
-  padding: 10px 24px;
-  font-size: 12px;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  border-radius: 3px;
-}
-.setup-save-btn:hover { background: var(--ink2); }
-
-/* ═══════════════════════════════════════════
-   UTILITY
-═══════════════════════════════════════════ */
-.divider-rule {
-  border: none;
-  border-top: 1px solid var(--rule);
-  margin: 24px 0;
-}
-.text-mono { font-family: var(--font-mono); }
-.text-muted { color: var(--ink3); }
-.hidden { display: none !important; }
-
-/* ═══════════════════════════════════════════
+/* ═══════════════════════════════════
    RESPONSIVE
-═══════════════════════════════════════════ */
-@media (max-width: 768px) {
-  .masthead { padding: 0 20px; }
-  .masthead-title { font-size: 26px; }
-  .command-bar { padding: 12px 20px; }
-  .main { padding: 20px 20px 60px; }
-  .bid-header { flex-direction: column; gap: 8px; }
-  .action-buttons { flex-wrap: wrap; }
-  .badge-summary { display: none; }
+═══════════════════════════════════ */
+@media(max-width:768px){
+  .masthead,.cmd-bar,.main{padding-left:18px;padding-right:18px}
+  .masthead-title{font-size:26px}
+  .bid-hdr{flex-direction:column;gap:7px}
+  .badges{display:none}
 }
 </style>
 </head>
 <body>
 
-<!-- ═══════════════════════ MASTHEAD ═══════════════════════ -->
+<!-- ═══ MASTHEAD ═══ -->
 <header class="masthead">
   <div class="masthead-brand">
-    <div class="masthead-eyebrow">Don Amburgey's Plumbing</div>
+    <div class="eyebrow">Don Amburgey's Plumbing</div>
     <div class="masthead-title">Daily Briefing</div>
     <div class="masthead-sub">Mallie, KY</div>
   </div>
   <div class="masthead-controls">
-    <button class="theme-btn" id="themeToggle" onclick="THEME.toggle()">☾ Dark</button>
-    <button class="theme-btn" onclick="SETUP.open()">⚙ Setup</button>
+    <button class="ctrl-btn" id="themeBtn" onclick="THEME.toggle()">☾ Dark</button>
+    <button class="ctrl-btn" onclick="SETUP.open()">⚙ Setup</button>
+    <a id="sheetLink" href="#" target="_blank" class="ctrl-btn">📋 Tracker</a>
   </div>
 </header>
 
-<!-- ═══════════════════════ SETUP BANNER ═══════════════════════ -->
-<div class="setup-banner" id="setupBanner">
-  <p>⚠ App not yet configured. Add your API keys to get started. <a href="#" onclick="SETUP.open(); return false;">Open setup guide →</a></p>
-  <button class="setup-link-btn" onclick="SETUP.open()">Configure Now</button>
-</div>
-
-<!-- ═══════════════════════ COMMAND BAR ═══════════════════════ -->
-<div class="command-bar">
-  <div class="command-left">
+<!-- ═══ COMMAND BAR ═══ -->
+<div class="cmd-bar">
+  <div class="cmd-left">
     <button class="run-btn" id="runBtn" onclick="BRIEFING.run()">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
-      Run Sweep
+      <span id="runIcon">↻</span> Run Sweep
     </button>
-    <div class="sweep-meta" id="sweepMeta">
-      <span id="sweepStatus">Ready — click to scan Gmail</span>
-    </div>
+    <div class="sweep-meta" id="sweepStatus">Ready — click to scan Gmail</div>
   </div>
-  <div class="command-right">
-    <div class="badge-summary" id="badgeSummary" style="display:none">
-      <span class="badge badge-red" id="badgeHigh">0 High</span>
-      <span class="badge badge-amber" id="badgeBids">0 Bids</span>
-      <span class="badge badge-blue" id="badgeFlags">0 Flags</span>
-    </div>
+  <div class="badges" id="badges" style="display:none">
+    <span class="badge badge-r" id="bHigh">0 High</span>
+    <span class="badge badge-a" id="bBids">0 Bids</span>
+    <span class="badge badge-b" id="bFlags">0 Flags</span>
   </div>
 </div>
 
-<!-- ═══════════════════════ MAIN CONTENT ═══════════════════════ -->
+<!-- ═══ MAIN ═══ -->
 <main class="main">
-  <div class="progress-bar" id="progressBar"><div class="progress-fill" id="progressFill"></div></div>
-  <div class="progress-label" id="progressLabel">Scanning Gmail...</div>
-
-  <!-- EMPTY STATE -->
-  <div class="empty-state" id="emptyState">
-    <div class="empty-state-icon">📋</div>
-    <h2>No briefing yet</h2>
-    <p>Hit "Run Sweep" to scan Gmail and generate your morning briefing.</p>
+  <div class="warn-box" id="warnBox"></div>
+  <div class="prog-wrap" id="progWrap">
+    <div class="prog-bar"><div class="prog-fill" id="progFill"></div></div>
+    <div class="prog-label" id="progLabel">Starting...</div>
   </div>
 
-  <!-- REPORT (hidden until sweep runs) -->
-  <div id="reportContainer" class="hidden">
+  <!-- Empty state -->
+  <div class="empty" id="emptyState">
+    <div class="empty-icon">📋</div>
+    <h2>No briefing yet</h2>
+    <p>Click Run Sweep to scan your Gmail and generate your morning briefing. Make sure your Claude API key is entered in Setup first.</p>
+  </div>
 
-    <!-- MODULE: ACTION ITEMS -->
-    <div class="section" id="sectionActions">
-      <div class="section-header" onclick="UI.toggleSection('sectionActions')">
-        <div class="section-header-left">
-          <div>
-            <div class="section-label">Section 1</div>
-            <div class="section-title">Action Items</div>
-          </div>
-          <span class="section-count has-items" id="countActions">0</span>
-        </div>
-        <span class="section-toggle">▾</span>
+  <!-- Report (hidden until sweep) -->
+  <div id="report" style="display:none">
+
+    <div class="section" id="sAct">
+      <div class="sec-hdr" onclick="UI.tog('sAct')">
+        <div class="sec-hdr-l"><div><div class="sec-lbl">Section 1</div><div class="sec-title">Action Items</div></div><span class="sec-cnt on" id="cAct">0</span></div>
+        <span class="sec-tog">▾</span>
       </div>
-      <div class="section-body" id="bodyActions"></div>
+      <div class="sec-body" id="bAct"></div>
     </div>
 
-    <!-- MODULE: BID INVITES -->
-    <div class="section" id="sectionBids">
-      <div class="section-header" onclick="UI.toggleSection('sectionBids')">
-        <div class="section-header-left">
-          <div>
-            <div class="section-label">Section 2 · Kentucky ≤130 mi</div>
-            <div class="section-title">Bid Invites</div>
-          </div>
-          <span class="section-count has-items" id="countBids">0</span>
-        </div>
-        <span class="section-toggle">▾</span>
+    <div class="section" id="sBid">
+      <div class="sec-hdr" onclick="UI.tog('sBid')">
+        <div class="sec-hdr-l"><div><div class="sec-lbl">Section 2 · Kentucky ≤130 mi</div><div class="sec-title">Bid Invites</div></div><span class="sec-cnt on" id="cBid">0</span></div>
+        <span class="sec-tog">▾</span>
       </div>
-      <div class="section-body" id="bodyBids"></div>
+      <div class="sec-body" id="bBid"></div>
     </div>
 
-    <!-- MODULE: AMENDMENTS -->
-    <div class="section" id="sectionAmendments">
-      <div class="section-header" onclick="UI.toggleSection('sectionAmendments')">
-        <div class="section-header-left">
-          <div>
-            <div class="section-label">Section 3</div>
-            <div class="section-title">Solicitation Amendments</div>
-          </div>
-          <span class="section-count" id="countAmendments">0</span>
-        </div>
-        <span class="section-toggle">▾</span>
+    <div class="section" id="sAmd">
+      <div class="sec-hdr" onclick="UI.tog('sAmd')">
+        <div class="sec-hdr-l"><div><div class="sec-lbl">Section 3</div><div class="sec-title">Solicitation Amendments</div></div><span class="sec-cnt" id="cAmd">0</span></div>
+        <span class="sec-tog">▾</span>
       </div>
-      <div class="section-body" id="bodyAmendments"></div>
+      <div class="sec-body" id="bAmd"></div>
     </div>
 
-    <!-- MODULE: MATERIALS FLAGS -->
-    <div class="section" id="sectionMaterials">
-      <div class="section-header" onclick="UI.toggleSection('sectionMaterials')">
-        <div class="section-header-left">
-          <div>
-            <div class="section-label">Section 4</div>
-            <div class="section-title">Materials &amp; Deliveries</div>
-          </div>
-          <span class="section-count" id="countMaterials">0</span>
-        </div>
-        <span class="section-toggle">▾</span>
+    <div class="section" id="sMat">
+      <div class="sec-hdr" onclick="UI.tog('sMat')">
+        <div class="sec-hdr-l"><div><div class="sec-lbl">Section 4</div><div class="sec-title">Materials &amp; Deliveries</div></div><span class="sec-cnt" id="cMat">0</span></div>
+        <span class="sec-tog">▾</span>
       </div>
-      <div class="section-body" id="bodyMaterials"></div>
+      <div class="sec-body" id="bMat"></div>
     </div>
 
-    <!-- MODULE: JOB TRACKER FLAGS -->
-    <div class="section" id="sectionFlags">
-      <div class="section-header" onclick="UI.toggleSection('sectionFlags')">
-        <div class="section-header-left">
-          <div>
-            <div class="section-label">Section 5</div>
-            <div class="section-title">Job Tracker Updates</div>
-          </div>
-          <span class="section-count" id="countFlags">0</span>
-        </div>
-        <span class="section-toggle">▾</span>
+    <div class="section" id="sFlg">
+      <div class="sec-hdr" onclick="UI.tog('sFlg')">
+        <div class="sec-hdr-l"><div><div class="sec-lbl">Section 5</div><div class="sec-title">Job Tracker Updates</div></div><span class="sec-cnt" id="cFlg">0</span></div>
+        <span class="sec-tog">▾</span>
       </div>
-      <div class="section-body" id="bodyFlags"></div>
+      <div class="sec-body" id="bFlg"></div>
     </div>
 
-    <!-- MODULE: PASSED / NO BID (collapsed) -->
-    <div class="section collapsed" id="sectionNoBid">
-      <div class="section-header" onclick="UI.toggleSection('sectionNoBid')">
-        <div class="section-header-left">
-          <div>
-            <div class="section-label">Archived</div>
-            <div class="section-title">Passed / No Bid</div>
-          </div>
-          <span class="section-count" id="countNoBid">0</span>
-        </div>
-        <span class="section-toggle">▾</span>
+    <div class="section collapsed" id="sNB">
+      <div class="sec-hdr" onclick="UI.tog('sNB')">
+        <div class="sec-hdr-l"><div><div class="sec-lbl">Archived</div><div class="sec-title">Passed / No Bid</div></div><span class="sec-cnt" id="cNB">0</span></div>
+        <span class="sec-tog">▾</span>
       </div>
-      <div class="section-body" id="bodyNoBid"></div>
+      <div class="sec-body" id="bNB"></div>
     </div>
 
-    <!-- MODULE: COMPLETED (collapsed) -->
-    <div class="section collapsed" id="sectionCompleted">
-      <div class="section-header" onclick="UI.toggleSection('sectionCompleted')">
-        <div class="section-header-left">
-          <div>
-            <div class="section-label">Archived</div>
-            <div class="section-title">Completed Actions</div>
-          </div>
-          <span class="section-count" id="countCompleted">0</span>
-        </div>
-        <span class="section-toggle">▾</span>
+    <div class="section collapsed" id="sCmp">
+      <div class="sec-hdr" onclick="UI.tog('sCmp')">
+        <div class="sec-hdr-l"><div><div class="sec-lbl">Archived</div><div class="sec-title">Completed Actions</div></div><span class="sec-cnt" id="cCmp">0</span></div>
+        <span class="sec-tog">▾</span>
       </div>
-      <div class="section-body" id="bodyCompleted"></div>
+      <div class="sec-body" id="bCmp"></div>
     </div>
 
-    <!-- MODULE: NOISE (collapsed) -->
-    <div class="section collapsed" id="sectionNoise">
-      <div class="section-header" onclick="UI.toggleSection('sectionNoise')">
-        <div class="section-header-left">
-          <div>
-            <div class="section-label">Filtered Out</div>
-            <div class="section-title">Noise / No Action</div>
-          </div>
-          <span class="section-count" id="countNoise">0</span>
-        </div>
-        <span class="section-toggle">▾</span>
+    <div class="section collapsed" id="sNoise">
+      <div class="sec-hdr" onclick="UI.tog('sNoise')">
+        <div class="sec-hdr-l"><div><div class="sec-lbl">Filtered</div><div class="sec-title">Noise / No Action</div></div><span class="sec-cnt" id="cNoise">0</span></div>
+        <span class="sec-tog">▾</span>
       </div>
-      <div class="section-body" id="bodyNoise"></div>
+      <div class="sec-body" id="bNoise"></div>
     </div>
 
-  </div><!-- /reportContainer -->
+  </div><!-- /report -->
 </main>
 
-<!-- ═══════════════════════ GC CONTACT MODAL ═══════════════════════ -->
-<div class="modal-overlay" id="gcModal" onclick="GC_CARDS.closeOnOverlay(event)">
-  <div class="modal" id="gcModalInner">
-    <div class="modal-header">
-      <div>
-        <div class="modal-company" id="gcCompany">Company</div>
-        <div class="modal-name" id="gcName">Contact Name</div>
-        <div class="modal-role" id="gcRole">Role</div>
-      </div>
-      <button class="modal-close" onclick="GC_CARDS.close()">✕</button>
+<!-- ═══ GC MODAL ═══ -->
+<div class="overlay" id="gcModal" onclick="GC.closeOvl(event)">
+  <div class="modal modal-lg">
+    <div class="modal-hdr">
+      <div><div class="modal-co" id="gcCo"></div><div class="modal-name" id="gcName"></div><div class="modal-role" id="gcRole"></div></div>
+      <button class="modal-x" onclick="GC.close()">✕</button>
     </div>
     <div class="modal-body">
-      <div class="modal-contact-row">
-        <span class="modal-contact-label">Phone</span>
-        <span class="modal-contact-val" id="gcPhone">—</span>
-      </div>
-      <div class="modal-contact-row">
-        <span class="modal-contact-label">Email</span>
-        <span class="modal-contact-val" id="gcEmail">—</span>
-      </div>
-      <hr class="modal-divider">
-      <div class="modal-section-title">Active Jobs</div>
-      <div id="gcJobs"><p class="text-muted text-mono" style="font-size:12px">No active jobs found</p></div>
-      <hr class="modal-divider">
-      <div class="modal-section-title">Active Bids</div>
-      <div id="gcBids"><p class="text-muted text-mono" style="font-size:12px">No active bids found</p></div>
-      <hr class="modal-divider">
-      <div class="modal-section-title">Recent Email</div>
-      <div class="modal-recent-email" id="gcRecentEmail">No recent emails found</div>
-      <hr class="modal-divider">
-      <div class="modal-section-title">Notes</div>
-      <textarea class="modal-notes-area" id="gcNotes" placeholder="Add notes about this contact..."></textarea>
-      <button class="modal-save-btn" onclick="GC_CARDS.saveNotes()">Save Notes</button>
+      <div class="mc-row"><span class="mc-lbl">Phone</span><span class="mc-val" id="gcPhone">—</span></div>
+      <div class="mc-row"><span class="mc-lbl">Email</span><span class="mc-val" id="gcEmail">—</span></div>
+      <hr class="mdiv">
+      <div class="msec">Active Jobs</div><div id="gcJobs"></div>
+      <hr class="mdiv">
+      <div class="msec">Active Bids</div><div id="gcBids"></div>
+      <hr class="mdiv">
+      <div class="msec">Notes (saved locally)</div>
+      <textarea class="modal-notes" id="gcNotes" placeholder="Add notes about this contact..."></textarea>
+      <button class="modal-save" onclick="GC.saveNotes()">Save Notes</button>
     </div>
   </div>
 </div>
 
-<!-- ═══════════════════════ DRAFT EMAIL MODAL ═══════════════════════ -->
-<div class="modal-overlay" id="draftModal" onclick="DRAFT.closeOnOverlay(event)">
-  <div class="modal draft-modal">
-    <div class="modal-header">
-      <div>
-        <div class="modal-company">One-Click Draft</div>
-        <div class="modal-name">Email Draft</div>
-      </div>
-      <button class="modal-close" onclick="DRAFT.close()">✕</button>
-    </div>
-    <div class="modal-body">
-      <div class="draft-email-box">
-        <div class="draft-field">
-          <label>To</label>
-          <input type="email" id="draftTo" placeholder="recipient@email.com">
-        </div>
-        <div class="draft-field">
-          <label>Subject</label>
-          <input type="text" id="draftSubject">
-        </div>
-        <div class="draft-field">
-          <label>Body</label>
-          <textarea id="draftBody"></textarea>
-        </div>
-      </div>
-    </div>
-    <div class="draft-actions">
-      <button class="btn-copy" onclick="DRAFT.copy()">Copy to Clipboard</button>
-      <button class="btn-open-mail" onclick="DRAFT.openGmail()">Open in Gmail</button>
-    </div>
-  </div>
-</div>
-
-<!-- ═══════════════════════ SETUP MODAL ═══════════════════════ -->
-<div class="modal-overlay setup-modal" id="setupModal" onclick="SETUP.closeOnOverlay(event)">
+<!-- ═══ DRAFT MODAL ═══ -->
+<div class="overlay" id="draftModal" onclick="DRAFT.closeOvl(event)">
   <div class="modal">
-    <div class="modal-header">
-      <div>
-        <div class="modal-company">Configuration</div>
-        <div class="modal-name">App Setup</div>
-        <div class="modal-role">One-time setup — takes about 15 minutes</div>
-      </div>
-      <button class="modal-close" onclick="SETUP.close()">✕</button>
+    <div class="modal-hdr">
+      <div><div class="modal-co">One-Click Draft</div><div class="modal-name">Email Draft</div></div>
+      <button class="modal-x" onclick="DRAFT.close()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="draft-field"><label>To</label><input type="email" id="dTo"></div>
+      <div class="draft-field"><label>Subject</label><input type="text" id="dSub"></div>
+      <div class="draft-field"><label>Body</label><textarea id="dBody"></textarea></div>
+    </div>
+    <div class="draft-acts">
+      <button class="btn-copy" onclick="DRAFT.copy()">Copy</button>
+      <button class="btn-gmail" onclick="DRAFT.openGmail()">Open in Gmail</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ SETUP MODAL ═══ -->
+<div class="overlay" id="setupModal" onclick="SETUP.closeOvl(event)">
+  <div class="modal modal-lg">
+    <div class="modal-hdr">
+      <div><div class="modal-co">Configuration</div><div class="modal-name">App Setup</div></div>
+      <button class="modal-x" onclick="SETUP.close()">✕</button>
     </div>
     <div class="modal-body" style="padding:0">
 
       <div class="setup-step">
-        <div class="setup-step-header">
+        <div class="setup-step-hdr">
           <div class="setup-step-num">1</div>
           <div class="setup-step-title">Claude API Key</div>
         </div>
-        <p>Go to <strong>console.anthropic.com</strong>, create an account (same email is fine), then go to API Keys and create a new key. Paste it below.</p>
-        <input type="password" id="setupClaudeKey" placeholder="sk-ant-..." autocomplete="off">
-        <p style="margin-top:6px; font-size:11px;">Your daily sweep costs roughly $0.01–0.05. Usage is billed directly to your Anthropic Console account.</p>
+        <p>Get your key from <strong>console.anthropic.com</strong> → API Keys → Create Key. Costs ~$0.02–0.05 per daily sweep.</p>
+        <input type="password" id="setupKey" placeholder="sk-ant-..." autocomplete="off">
       </div>
 
       <div class="setup-step">
-        <div class="setup-step-header">
+        <div class="setup-step-hdr">
           <div class="setup-step-num">2</div>
-          <div class="setup-step-title">Google OAuth Client ID</div>
-        </div>
-        <p>Go to <strong>console.cloud.google.com</strong> → New Project → APIs &amp; Services → Credentials → Create OAuth 2.0 Client ID (Web Application). Add <code>file://</code> and your local file path as authorized origins. Paste your Client ID below.</p>
-        <input type="text" id="setupGoogleClientId" placeholder="123456789-abc.apps.googleusercontent.com">
-      </div>
-
-      <div class="setup-step">
-        <div class="setup-step-header">
-          <div class="setup-step-num">3</div>
-          <div class="setup-step-title">Enable Google APIs</div>
-        </div>
-        <p>In Google Cloud Console → APIs &amp; Services → Library, enable these three APIs:</p>
-        <p><code>Gmail API</code> &nbsp; <code>Google Sheets API</code> &nbsp; <code>Google Drive API</code></p>
-      </div>
-
-      <div class="setup-step">
-        <div class="setup-step-header">
-          <div class="setup-step-num">4</div>
-          <div class="setup-step-title">Google Sheet ID</div>
-        </div>
-        <p>Open your job tracker Google Sheet (or create a new one). The Sheet ID is in the URL: <code>docs.google.com/spreadsheets/d/<strong>THIS_PART</strong>/edit</code>. Paste it below.</p>
-        <input type="text" id="setupSheetId" placeholder="1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgVE2upms">
-        <p style="margin-top:6px; font-size:11px;">The app will create the required tabs (GC Contacts, App State) automatically on first run if they don't exist.</p>
-      </div>
-
-      <div class="setup-step">
-        <div class="setup-step-header">
-          <div class="setup-step-num">5</div>
           <div class="setup-step-title">Gmail Address</div>
         </div>
-        <p>Confirm the Gmail address to scan for the morning sweep.</p>
-        <input type="email" id="setupGmailAddress" value="jordan@amburgeysplumbing.com">
+        <p>The Gmail account to scan each morning.</p>
+        <input type="email" id="setupEmail" value="jordan@amburgeysplumbing.com">
+      </div>
+
+      <div class="setup-step">
+        <div class="setup-step-hdr">
+          <div class="setup-step-num">3</div>
+          <div class="setup-step-title">Google Sheet ID (optional)</div>
+        </div>
+        <p>Your job tracker Sheet ID from the URL. Used to link the Job Tracker button.</p>
+        <input type="text" id="setupSheet" placeholder="1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgVE2upms">
+      </div>
+
+      <div class="setup-step">
+        <div class="setup-step-hdr">
+          <div class="setup-step-num">4</div>
+          <div class="setup-step-title">Sweep Window</div>
+        </div>
+        <p>How many hours back to scan on each sweep.</p>
+        <select id="setupHours">
+          <option value="12">Last 12 hours</option>
+          <option value="24" selected>Last 24 hours</option>
+          <option value="48">Last 48 hours</option>
+        </select>
       </div>
 
     </div>
     <div class="setup-footer">
-      <span class="text-mono text-muted" style="font-size:11px">Keys stored locally in your browser only</span>
-      <button class="setup-save-btn" onclick="SETUP.save()">Save &amp; Connect</button>
+      <span style="font-family:var(--font-m);font-size:11px;color:var(--ink3)">Stored locally in your browser</span>
+      <button class="setup-save" onclick="SETUP.save()">Save Settings</button>
     </div>
   </div>
 </div>
 
-<!-- ═══════════════════════════════════════════
-     JAVASCRIPT MODULES
-═══════════════════════════════════════════ -->
 <script>
+'use strict';
 
-/* ── MODULE: CONFIG ──────────────────────────────────────── */
+// ══════════════════════════════════════════════════════
+// MODULE: CONFIG
+// ══════════════════════════════════════════════════════
 const CONFIG = {
-  // Loaded from localStorage on init
-  claudeKey: '',
-  googleClientId: '',
-  sheetId: '',
+  KEY:   'amb_settings',
+  STATE: 'amb_state',
+  claudeKey:    '',
   gmailAddress: 'jordan@amburgeysplumbing.com',
-
-  // Constants
-  OFFICE_LAT: 37.1318,
-  OFFICE_LNG: -82.8185,
-  MAX_MILES: 130,
-  STATE_KEY: 'amburgey_briefing_state',
-  SETTINGS_KEY: 'amburgey_settings',
-
-  // Claude model
-  MODEL: 'claude-sonnet-4-20250514',
+  sheetId:      '',
+  sweepHours:   24,
 
   load() {
-    const saved = localStorage.getItem(this.SETTINGS_KEY);
-    if (saved) {
-      const s = JSON.parse(saved);
-      this.claudeKey = s.claudeKey || '';
-      this.googleClientId = s.googleClientId || '';
-      this.sheetId = s.sheetId || '';
-      this.gmailAddress = s.gmailAddress || this.gmailAddress;
-    }
-    return !!(this.claudeKey && this.googleClientId && this.sheetId);
+    try {
+      const s = JSON.parse(localStorage.getItem(this.KEY) || '{}');
+      this.claudeKey    = s.claudeKey    || '';
+      this.gmailAddress = s.gmailAddress || 'jordan@amburgeysplumbing.com';
+      this.sheetId      = s.sheetId      || '';
+      this.sweepHours   = s.sweepHours   || 24;
+    } catch(e) {}
   },
 
-  save(claudeKey, googleClientId, sheetId, gmailAddress) {
-    this.claudeKey = claudeKey;
-    this.googleClientId = googleClientId;
-    this.sheetId = sheetId;
-    this.gmailAddress = gmailAddress;
-    localStorage.setItem(this.SETTINGS_KEY, JSON.stringify({
-      claudeKey, googleClientId, sheetId, gmailAddress
-    }));
+  save(key, email, sheet, hours) {
+    this.claudeKey    = key;
+    this.gmailAddress = email;
+    this.sheetId      = sheet;
+    this.sweepHours   = hours;
+    localStorage.setItem(this.KEY, JSON.stringify({ claudeKey:key, gmailAddress:email, sheetId:sheet, sweepHours:hours }));
   },
 
-  isConfigured() {
-    return !!(this.claudeKey && this.googleClientId && this.sheetId);
-  }
+  isReady() { return !!this.claudeKey; }
 };
 
-/* ── MODULE: STATE ───────────────────────────────────────── */
+// ══════════════════════════════════════════════════════
+// MODULE: STATE
+// All decisions persisted to localStorage
+// ══════════════════════════════════════════════════════
 const STATE = {
-  // Persisted locally + synced to Sheets
-  completedActions: new Set(),   // action item IDs
-  noBidInvites: new Set(),       // bid invite IDs (never resurface)
-  followingBids: new Set(),      // bid invite IDs
-  acknowledgedFlags: new Set(),  // flag IDs
-  noBidReasons: {},              // id -> reason string
-  gcNotes: {},                   // contact name -> notes
-  lastSweepTime: null,
-  scopeNotes: {},                // bid id -> scope notes
+  completedActions: [],
+  noBidInvites:     [],
+  followingBids:    [],
+  gcNotes:          {},
+  scopeNotes:       {},
+  noBidReasons:     {},
+  lastSweepTime:    null,
 
   load() {
-    const raw = localStorage.getItem(CONFIG.STATE_KEY);
-    if (raw) {
-      const s = JSON.parse(raw);
-      this.completedActions  = new Set(s.completedActions  || []);
-      this.noBidInvites      = new Set(s.noBidInvites      || []);
-      this.followingBids     = new Set(s.followingBids     || []);
-      this.acknowledgedFlags = new Set(s.acknowledgedFlags || []);
-      this.noBidReasons      = s.noBidReasons || {};
-      this.gcNotes           = s.gcNotes || {};
-      this.lastSweepTime     = s.lastSweepTime || null;
-      this.scopeNotes        = s.scopeNotes || {};
-    }
+    try {
+      const s = JSON.parse(localStorage.getItem(CONFIG.STATE) || '{}');
+      this.completedActions = s.completedActions || [];
+      this.noBidInvites     = s.noBidInvites     || [];
+      this.followingBids    = s.followingBids    || [];
+      this.gcNotes          = s.gcNotes          || {};
+      this.scopeNotes       = s.scopeNotes       || {};
+      this.noBidReasons     = s.noBidReasons     || {};
+      this.lastSweepTime    = s.lastSweepTime    || null;
+    } catch(e) {}
   },
 
   save() {
-    const s = {
-      completedActions:  [...this.completedActions],
-      noBidInvites:      [...this.noBidInvites],
-      followingBids:     [...this.followingBids],
-      acknowledgedFlags: [...this.acknowledgedFlags],
-      noBidReasons:      this.noBidReasons,
-      gcNotes:           this.gcNotes,
-      lastSweepTime:     this.lastSweepTime,
-      scopeNotes:        this.scopeNotes,
-    };
-    localStorage.setItem(CONFIG.STATE_KEY, JSON.stringify(s));
-    // Also sync to Google Sheets in background (non-blocking)
-    SHEETS.saveState(s).catch(e => console.warn('Sheet state sync failed:', e));
-  }
+    localStorage.setItem(CONFIG.STATE, JSON.stringify({
+      completedActions: this.completedActions,
+      noBidInvites:     this.noBidInvites,
+      followingBids:    this.followingBids,
+      gcNotes:          this.gcNotes,
+      scopeNotes:       this.scopeNotes,
+      noBidReasons:     this.noBidReasons,
+      lastSweepTime:    this.lastSweepTime
+    }));
+  },
+
+  hasCompleted(id) { return this.completedActions.includes(id); },
+  hasNoBid(id)     { return this.noBidInvites.includes(id); },
+  hasFollowing(id) { return this.followingBids.includes(id); },
+
+  complete(id)   { if(!this.hasCompleted(id)) this.completedActions.push(id); this.save(); },
+  uncomplete(id) { this.completedActions = this.completedActions.filter(x=>x!==id); this.save(); },
+  noBid(id, reason) {
+    if(!this.hasNoBid(id)) this.noBidInvites.push(id);
+    if(reason) this.noBidReasons[id] = reason;
+    this.save();
+  },
+  follow(id)   { if(!this.hasFollowing(id)) this.followingBids.push(id); this.save(); },
+  unfollow(id) { this.followingBids = this.followingBids.filter(x=>x!==id); this.save(); }
 };
 
-/* ── MODULE: THEME ───────────────────────────────────────── */
+// ══════════════════════════════════════════════════════
+// MODULE: THEME
+// ══════════════════════════════════════════════════════
 const THEME = {
-  current: 'light',
+  cur: 'light',
   init() {
-    const saved = localStorage.getItem('amburgey_theme') || 'light';
-    this.apply(saved);
+    const t = localStorage.getItem('amb_theme') || 'light';
+    this.apply(t);
   },
-  toggle() {
-    this.apply(this.current === 'light' ? 'dark' : 'light');
-  },
-  apply(mode) {
-    this.current = mode;
-    document.documentElement.setAttribute('data-theme', mode);
-    const btn = document.getElementById('themeToggle');
-    btn.textContent = mode === 'dark' ? '☀ Light' : '☾ Dark';
-    localStorage.setItem('amburgey_theme', mode);
+  toggle() { this.apply(this.cur === 'light' ? 'dark' : 'light'); },
+  apply(m) {
+    this.cur = m;
+    document.documentElement.setAttribute('data-theme', m);
+    document.getElementById('themeBtn').textContent = m === 'dark' ? '☀ Light' : '☾ Dark';
+    localStorage.setItem('amb_theme', m);
   }
 };
 
-/* ── MODULE: UI ──────────────────────────────────────────── */
+// ══════════════════════════════════════════════════════
+// MODULE: UI helpers
+// ══════════════════════════════════════════════════════
 const UI = {
-  toggleSection(id) {
-    document.getElementById(id).classList.toggle('collapsed');
-  },
+  tog(id) { document.getElementById(id).classList.toggle('collapsed'); },
 
-  setProgress(pct, label) {
-    document.getElementById('progressBar').classList.add('active');
-    document.getElementById('progressLabel').classList.add('active');
-    document.getElementById('progressFill').style.width = pct + '%';
-    document.getElementById('progressLabel').textContent = label;
+  prog(pct, lbl) {
+    document.getElementById('progWrap').classList.add('on');
+    document.getElementById('progFill').style.width = pct + '%';
+    document.getElementById('progLabel').textContent = lbl;
   },
+  clearProg() { document.getElementById('progWrap').classList.remove('on'); },
 
-  clearProgress() {
-    document.getElementById('progressBar').classList.remove('active');
-    document.getElementById('progressLabel').classList.remove('active');
-  },
+  status(msg) { document.getElementById('sweepStatus').textContent = msg; },
 
-  setSweepStatus(msg) {
-    document.getElementById('sweepStatus').textContent = msg;
+  warn(msg) {
+    const el = document.getElementById('warnBox');
+    if (msg) { el.textContent = msg; el.classList.add('on'); }
+    else { el.classList.remove('on'); }
   },
 
   showReport() {
-    document.getElementById('emptyState').classList.add('hidden');
-    document.getElementById('reportContainer').classList.remove('hidden');
+    document.getElementById('emptyState').style.display = 'none';
+    document.getElementById('report').style.display = 'block';
   },
 
-  updateBadges(high, bids, flags) {
-    document.getElementById('badgeSummary').style.display = 'flex';
-    document.getElementById('badgeHigh').textContent  = high  + ' High';
-    document.getElementById('badgeBids').textContent  = bids  + ' Bids';
-    document.getElementById('badgeFlags').textContent = flags + ' Flags';
-  },
-
-  setCount(id, n) {
+  cnt(id, n) {
     const el = document.getElementById(id);
     el.textContent = n;
-    el.className = 'section-count' + (n > 0 ? ' has-items' : '');
+    el.className = 'sec-cnt' + (n > 0 ? ' on' : '');
   },
 
-  escapeHtml(str) {
-    if (!str) return '';
-    return String(str)
-      .replace(/&/g, '&amp;')
-      .replace(/</g, '&lt;')
-      .replace(/>/g, '&gt;')
-      .replace(/"/g, '&quot;');
+  badges(h, b, f) {
+    document.getElementById('badges').style.display = 'flex';
+    document.getElementById('bHigh').textContent  = h + ' High';
+    document.getElementById('bBids').textContent  = b + ' Bids';
+    document.getElementById('bFlags').textContent = f + ' Flags';
+  },
+
+  esc(s) {
+    if (!s) return '';
+    return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  },
+
+  _si: null,
+  spinStart() {
+    let d = 0;
+    this._si = setInterval(() => {
+      d = (d + 10) % 360;
+      const i = document.getElementById('runIcon');
+      i.style.display = 'inline-block';
+      i.style.transform = `rotate(${d}deg)`;
+    }, 30);
+  },
+  spinStop() {
+    clearInterval(this._si);
+    const i = document.getElementById('runIcon');
+    i.style.transform = '';
   }
 };
 
-/* ── MODULE: AUTH (Google OAuth) ─────────────────────────── */
-const AUTH = {
-  token: null,
-  tokenExpiry: null,
+// ══════════════════════════════════════════════════════
+// MODULE: CLAUDE API
+// Calls Claude with Gmail MCP tool enabled so Claude
+// reads email directly — no separate OAuth needed
+// ══════════════════════════════════════════════════════
+const CLAUDE = {
+  async sweep(sinceIso) {
+    const since = sinceIso
+      ? new Date(sinceIso).toISOString().split('T')[0].replace(/-/g,'/')
+      : new Date(Date.now() - CONFIG.sweepHours * 3600000).toISOString().split('T')[0].replace(/-/g,'/');
 
-  async getToken() {
-    if (this.token && this.tokenExpiry > Date.now()) return this.token;
-    return await this.signIn();
-  },
+    const prompt = `You are helping Jordan Amburgey, VP of Don Amburgey's Plumbing, Heating & Mechanical in Mallie, KY (Letcher County) — a small commercial mechanical contractor with 6 tradesmen. Focus: schools, hospitals, judicial centers. Key GCs: Trace Creek (Zach Duncan), Denham Blythe (Hayden Dickens, Kelli Peterson), Allen Construction (Ryan Eldridge), Churchill McGee, Devere Construction.
 
-  signIn() {
-    return new Promise((resolve, reject) => {
-      if (!window.google) { reject(new Error('Google API not loaded')); return; }
-      const client = google.accounts.oauth2.initTokenClient({
-        client_id: CONFIG.googleClientId,
-        scope: [
-          'https://www.googleapis.com/auth/gmail.readonly',
-          'https://www.googleapis.com/auth/spreadsheets',
-        ].join(' '),
-        callback: (resp) => {
-          if (resp.error) { reject(new Error(resp.error)); return; }
-          this.token = resp.access_token;
-          this.tokenExpiry = Date.now() + (resp.expires_in - 60) * 1000;
-          resolve(this.token);
-        }
-      });
-      client.requestAccessToken({ prompt: '' });
-    });
-  }
-};
+TASK: Use the Gmail tool to search for emails after:${since} in ${CONFIG.gmailAddress}. Fetch up to 40 messages. Exclude: LinkedIn notifications, promotional emails, order confirmations, NETGEAR, Advance Auto Parts.
 
-/* ── MODULE: GMAIL ────────────────────────────────────────── */
-const GMAIL = {
-  async fetchEmailsSince(sinceTimestamp) {
-    const token = await AUTH.getToken();
-    const afterDate = sinceTimestamp
-      ? new Date(sinceTimestamp).toISOString().split('T')[0].replace(/-/g, '/')
-      : new Date(Date.now() - 24*60*60*1000).toISOString().split('T')[0].replace(/-/g, '/');
-
-    const q = `after:${afterDate} -category:promotions -from:noreply@linkedin.com`;
-    const listUrl = `https://gmail.googleapis.com/gmail/v1/users/me/messages?maxResults=50&q=${encodeURIComponent(q)}`;
-
-    const listResp = await fetch(listUrl, {
-      headers: { Authorization: `Bearer ${token}` }
-    });
-    const listData = await listResp.json();
-    if (!listData.messages) return [];
-
-    // Fetch summaries (headers only) for each message
-    const emails = [];
-    const ids = listData.messages.slice(0, 40); // cap at 40
-    for (const msg of ids) {
-      try {
-        const msgResp = await fetch(
-          `https://gmail.googleapis.com/gmail/v1/users/me/messages/${msg.id}?format=metadata&metadataHeaders=From&metadataHeaders=Subject&metadataHeaders=Date`,
-          { headers: { Authorization: `Bearer ${token}` } }
-        );
-        const msgData = await msgResp.json();
-        const headers = {};
-        (msgData.payload?.headers || []).forEach(h => { headers[h.name] = h.value; });
-        emails.push({
-          id: msg.id,
-          threadId: msgData.threadId,
-          subject: headers['Subject'] || '(no subject)',
-          from: headers['From'] || '',
-          date: headers['Date'] || '',
-          snippet: msgData.snippet || '',
-          labelIds: msgData.labelIds || []
-        });
-      } catch(e) { /* skip failed message */ }
-    }
-    return emails;
-  }
-};
-
-/* ── MODULE: SHEETS ───────────────────────────────────────── */
-const SHEETS = {
-  base() { return `https://sheets.googleapis.com/v4/spreadsheets/${CONFIG.sheetId}`; },
-
-  async read(range) {
-    const token = await AUTH.getToken();
-    const resp = await fetch(
-      `${this.base()}/values/${encodeURIComponent(range)}`,
-      { headers: { Authorization: `Bearer ${token}` } }
-    );
-    const data = await resp.json();
-    return data.values || [];
-  },
-
-  async append(range, values) {
-    const token = await AUTH.getToken();
-    await fetch(
-      `${this.base()}/values/${encodeURIComponent(range)}:append?valueInputOption=USER_ENTERED`,
-      {
-        method: 'POST',
-        headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
-        body: JSON.stringify({ values })
-      }
-    );
-  },
-
-  async update(range, values) {
-    const token = await AUTH.getToken();
-    await fetch(
-      `${this.base()}/values/${encodeURIComponent(range)}?valueInputOption=USER_ENTERED`,
-      {
-        method: 'PUT',
-        headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
-        body: JSON.stringify({ values })
-      }
-    );
-  },
-
-  async saveState(stateObj) {
-    // Save serialized state to App State tab, row 2
-    await this.update("'App State'!A2:B2", [
-      ['last_sweep', STATE.lastSweepTime || ''],
-    ]);
-    await this.update("'App State'!A3:B3", [
-      ['completed_actions', JSON.stringify([...STATE.completedActions])],
-    ]);
-    await this.update("'App State'!A4:B4", [
-      ['no_bid_invites', JSON.stringify([...STATE.noBidInvites])],
-    ]);
-    await this.update("'App State'!A5:B5", [
-      ['following_bids', JSON.stringify([...STATE.followingBids])],
-    ]);
-    await this.update("'App State'!A6:B6", [
-      ['gc_notes', JSON.stringify(STATE.gcNotes)],
-    ]);
-  },
-
-  async readGCContacts() {
-    try {
-      const rows = await this.read("'GC Contacts'!A2:H100");
-      return rows.map(r => ({
-        company:    r[0] || '',
-        firstName:  r[1] || '',
-        lastName:   r[2] || '',
-        role:       r[3] || '',
-        phone:      r[4] || '',
-        email:      r[5] || '',
-        notes:      r[6] || '',
-        googleId:   r[7] || '',  // reserved for v2
-      }));
-    } catch(e) { return []; }
-  },
-
-  async addBidToPipeline(bid) {
-    const row = [
-      `B-${Date.now().toString().slice(-4)}`,
-      bid.project,
-      bid.scope || 'TBD',
-      '',  // est value
-      bid.bidDate || '',
-      '',  // days until bid (formula in sheet)
-      'Estimating',
-      'No',
-      '',  // follow-up date
-      bid.bidDate || '',
-      `Auto-added from briefing. GC: ${bid.gc}. Distance: ~${bid.miles} mi.`,
-      'Pending'
-    ];
-    await this.append("'Bid Pipeline'!A:L", [row]);
-  },
-
-  async saveGCNote(contactName, notes) {
-    const rows = await this.read("'GC Contacts'!A2:H100");
-    for (let i = 0; i < rows.length; i++) {
-      const fullName = `${rows[i][1] || ''} ${rows[i][2] || ''}`.trim();
-      const company = rows[i][0] || '';
-      if (fullName === contactName || company === contactName) {
-        await this.update(`'GC Contacts'!G${i+2}`, [[notes]]);
-        return;
-      }
-    }
-  }
-};
-
-/* ── MODULE: CLAUDE API ───────────────────────────────────── */
-const CLAUDE_API = {
-  async analyze(emails) {
-    const emailSummary = emails.map(e =>
-      `FROM: ${e.from}\nSUBJECT: ${e.subject}\nDATE: ${e.date}\nSNIPPET: ${e.snippet}`
-    ).join('\n---\n');
-
-    const prompt = `You are analyzing emails for Jordan Amburgey, VP of Don Amburgey's Plumbing, Heating & Mechanical in Mallie, KY (Letcher County). Small commercial mechanical contractor — 6 tradesmen. Focus: schools, hospitals, judicial centers. Key GCs: Trace Creek (Zach Duncan), Denham Blythe (Hayden Dickens, Kelli Peterson), Allen Construction (Ryan Eldridge), Churchill McGee, Devere Construction.
-
-Analyze these emails and return a JSON object with exactly these keys:
+After reading the emails, analyze them and return ONLY a valid JSON object with this exact structure:
 
 {
+  "emailCount": number of emails found,
   "actionItems": [
     {
       "id": "unique string",
-      "text": "clear action description",
+      "text": "clear action — one sentence max",
       "priority": "High|Medium|Low",
       "category": "Admin|Field|Estimating|Client|Bookkeeping",
-      "jobRef": "job name or bid name if relevant",
-      "draftNeeded": true/false,
-      "draftTo": "email if draftNeeded",
-      "draftSubject": "subject if draftNeeded",
-      "draftBody": "draft email body if draftNeeded"
+      "jobRef": "job or bid name if relevant, else null",
+      "draftNeeded": true or false,
+      "draftTo": "email address or null",
+      "draftSubject": "subject or null",
+      "draftBody": "full email body or null"
     }
   ],
   "bidInvites": [
@@ -1667,14 +669,14 @@ Analyze these emails and return a JSON object with exactly these keys:
       "id": "unique string",
       "project": "project name",
       "location": "City, State",
-      "state": "KY or other 2-letter code",
-      "miles": estimated miles from Mallie KY as number,
+      "state": "2-letter state code",
+      "miles": estimated integer miles from Mallie KY (37.13N 82.82W),
       "gc": "GC company name",
-      "gcContact": "contact name if known",
-      "gcEmail": "email if known",
+      "gcContact": "contact name or null",
+      "gcEmail": "email or null",
       "scope": "brief scope description",
       "bidDate": "date string or null",
-      "source": "email source platform"
+      "source": "platform name"
     }
   ],
   "amendments": [
@@ -1690,7 +692,7 @@ Analyze these emails and return a JSON object with exactly these keys:
     {
       "id": "unique string",
       "text": "what was mentioned",
-      "jobRef": "job if known",
+      "jobRef": "job name or null",
       "type": "delivery|order|quote|backorder"
     }
   ],
@@ -1698,28 +700,21 @@ Analyze these emails and return a JSON object with exactly these keys:
     {
       "id": "unique string",
       "job": "job name",
-      "flag": "what happened",
-      "suggestedUpdate": "suggested field update e.g. Status: In Progress → Punch List"
+      "flag": "what happened — one sentence",
+      "suggestedUpdate": "e.g. Status: In Progress → Punch List"
     }
   ],
   "noise": [
-    {
-      "from": "sender name",
-      "subject": "subject line"
-    }
+    { "from": "sender name", "subject": "subject line" }
   ]
 }
 
-IMPORTANT RULES:
-- For bidInvites, estimate miles from Mallie KY (37.13°N, 82.82°W). Flag all states, the app will filter.
-- Mark as noise: LinkedIn, promotional emails, order confirmations, auto-notifications with no action needed
-- If an email involves an active job with a known GC, flag it in jobTrackerFlags
-- draftNeeded=true only when a reply is clearly needed (follow-up, scope clarification, response to question)
-- Be concise in action text — one sentence max
-- Return ONLY valid JSON, no other text
-
-EMAILS TO ANALYZE:
-${emailSummary}`;
+RULES:
+- noise = LinkedIn, promos, auto-confirmations, no-action-needed emails
+- bidInvites: include ALL states — app filters to KY ≤130mi
+- draftNeeded = true only when a reply is clearly required
+- jobTrackerFlags = only when email directly involves a named active job
+- Return ONLY valid JSON, no markdown, no explanation`;
 
     const resp = await fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST',
@@ -1727,509 +722,431 @@ ${emailSummary}`;
         'Content-Type': 'application/json',
         'x-api-key': CONFIG.claudeKey,
         'anthropic-version': '2023-06-01',
+        'anthropic-beta': 'mcp-client-2025-04-04',
         'anthropic-dangerous-direct-browser-access': 'true'
       },
       body: JSON.stringify({
-        model: CONFIG.MODEL,
+        model: 'claude-sonnet-4-20250514',
         max_tokens: 4000,
+        mcp_servers: [{
+          type: 'url',
+          url: 'https://gmail.mcp.claude.com/mcp',
+          name: 'gmail'
+        }],
         messages: [{ role: 'user', content: prompt }]
       })
     });
 
+    if (!resp.ok) {
+      const err = await resp.json().catch(() => ({}));
+      throw new Error(err.error?.message || `API error ${resp.status}`);
+    }
+
     const data = await resp.json();
-    if (data.error) throw new Error(data.error.message);
 
-    const text = data.content[0].text.trim();
-    // Strip any markdown fences if present
-    const clean = text.replace(/```json\n?/g, '').replace(/```\n?/g, '').trim();
-    return JSON.parse(clean);
+    // Find the text response block — Claude may return tool_use blocks too
+    const textBlock = data.content.find(b => b.type === 'text');
+    if (!textBlock) throw new Error('No text response from Claude');
+
+    let text = textBlock.text.trim()
+      .replace(/```json\n?/g,'').replace(/```\n?/g,'').trim();
+    return JSON.parse(text);
   }
 };
 
-/* ── MODULE: GC CARDS ─────────────────────────────────────── */
-const GC_CARDS = {
-  currentContact: null,
-  contacts: [],
+// ══════════════════════════════════════════════════════
+// MODULE: RENDERER
+// Each section independently renderable
+// ══════════════════════════════════════════════════════
+const R = {
 
-  async open(nameOrCompany) {
-    if (this.contacts.length === 0) {
-      this.contacts = await SHEETS.readGCContacts();
-    }
-    const contact = this.contacts.find(c =>
-      `${c.firstName} ${c.lastName}`.trim() === nameOrCompany ||
-      c.company === nameOrCompany ||
-      c.email.toLowerCase() === nameOrCompany.toLowerCase()
-    ) || {
-      company: nameOrCompany,
-      firstName: nameOrCompany,
-      lastName: '',
-      role: 'Contact',
-      phone: '—',
-      email: '—',
-      notes: ''
-    };
-
-    this.currentContact = contact;
-    const fullName = `${contact.firstName} ${contact.lastName}`.trim();
-
-    document.getElementById('gcCompany').textContent = contact.company;
-    document.getElementById('gcName').textContent = fullName || contact.company;
-    document.getElementById('gcRole').textContent = contact.role;
-    document.getElementById('gcPhone').textContent = contact.phone || '—';
-    document.getElementById('gcEmail').innerHTML = contact.email && contact.email !== '—'
-      ? `<a href="mailto:${UI.escapeHtml(contact.email)}">${UI.escapeHtml(contact.email)}</a>` : '—';
-
-    // Saved notes (from STATE, which may be more current than Sheets)
-    const savedNotes = STATE.gcNotes[fullName] || contact.notes || '';
-    document.getElementById('gcNotes').value = savedNotes;
-
-    // Recent email placeholder — would need thread lookup for real data
-    document.getElementById('gcRecentEmail').textContent =
-      `Search Gmail for "${contact.email}" to see recent thread`;
-
-    // Jobs & bids from Sheets (shown as placeholder for now)
-    document.getElementById('gcJobs').innerHTML =
-      `<p class="text-muted text-mono" style="font-size:12px">Open your <a href="https://docs.google.com/spreadsheets/d/${CONFIG.sheetId}" target="_blank">job tracker</a> to view active jobs</p>`;
-    document.getElementById('gcBids').innerHTML =
-      `<p class="text-muted text-mono" style="font-size:12px">Active bids for ${UI.escapeHtml(contact.company)} will appear here</p>`;
-
-    document.getElementById('gcModal').classList.add('open');
-  },
-
-  close() {
-    document.getElementById('gcModal').classList.remove('open');
-    this.currentContact = null;
-  },
-
-  closeOnOverlay(e) {
-    if (e.target === document.getElementById('gcModal')) this.close();
-  },
-
-  saveNotes() {
-    if (!this.currentContact) return;
-    const fullName = `${this.currentContact.firstName} ${this.currentContact.lastName}`.trim()
-      || this.currentContact.company;
-    const notes = document.getElementById('gcNotes').value;
-    STATE.gcNotes[fullName] = notes;
-    STATE.save();
-    SHEETS.saveGCNote(fullName, notes).catch(e => console.warn('Notes sync:', e));
-    // Brief visual feedback
-    const btn = document.querySelector('.modal-save-btn');
-    btn.textContent = 'Saved ✓';
-    setTimeout(() => { btn.textContent = 'Save Notes'; }, 1500);
-  }
-};
-
-/* ── MODULE: DRAFT ────────────────────────────────────────── */
-const DRAFT = {
-  open(to, subject, body) {
-    document.getElementById('draftTo').value = to || '';
-    document.getElementById('draftSubject').value = subject || '';
-    document.getElementById('draftBody').value = body || '';
-    document.getElementById('draftModal').classList.add('open');
-  },
-
-  close() { document.getElementById('draftModal').classList.remove('open'); },
-
-  closeOnOverlay(e) {
-    if (e.target === document.getElementById('draftModal')) this.close();
-  },
-
-  copy() {
-    const text = `To: ${document.getElementById('draftTo').value}\nSubject: ${document.getElementById('draftSubject').value}\n\n${document.getElementById('draftBody').value}`;
-    navigator.clipboard.writeText(text).then(() => {
-      const btn = document.querySelector('.btn-copy');
-      btn.textContent = 'Copied ✓';
-      setTimeout(() => { btn.textContent = 'Copy to Clipboard'; }, 1500);
-    });
-  },
-
-  openGmail() {
-    const to = encodeURIComponent(document.getElementById('draftTo').value);
-    const subject = encodeURIComponent(document.getElementById('draftSubject').value);
-    const body = encodeURIComponent(document.getElementById('draftBody').value);
-    window.open(`https://mail.google.com/mail/?view=cm&to=${to}&su=${subject}&body=${body}`, '_blank');
-  }
-};
-
-/* ── MODULE: SETUP ────────────────────────────────────────── */
-const SETUP = {
-  open() {
-    document.getElementById('setupClaudeKey').value = CONFIG.claudeKey;
-    document.getElementById('setupGoogleClientId').value = CONFIG.googleClientId;
-    document.getElementById('setupSheetId').value = CONFIG.sheetId;
-    document.getElementById('setupGmailAddress').value = CONFIG.gmailAddress;
-    document.getElementById('setupModal').classList.add('open');
-  },
-
-  close() { document.getElementById('setupModal').classList.remove('open'); },
-
-  closeOnOverlay(e) {
-    if (e.target === document.getElementById('setupModal')) this.close();
-  },
-
-  save() {
-    const claudeKey = document.getElementById('setupClaudeKey').value.trim();
-    const clientId = document.getElementById('setupGoogleClientId').value.trim();
-    const sheetId = document.getElementById('setupSheetId').value.trim();
-    const gmail = document.getElementById('setupGmailAddress').value.trim();
-
-    if (!claudeKey || !clientId || !sheetId) {
-      alert('Please fill in Claude API Key, Google Client ID, and Sheet ID.');
-      return;
-    }
-
-    CONFIG.save(claudeKey, clientId, sheetId, gmail);
-    document.getElementById('setupBanner').style.display = 'none';
-    this.close();
-    // Reload Google API with new client ID
-    AUTH.token = null;
-    alert('Settings saved. Ready to run your first sweep!');
-  }
-};
-
-/* ── MODULE: RENDERER ─────────────────────────────────────── */
-const RENDERER = {
-
-  renderActionItems(items) {
-    const active = items.filter(i => !STATE.completedActions.has(i.id));
-    const completed = items.filter(i => STATE.completedActions.has(i.id));
-
-    UI.setCount('countActions', active.length);
-    document.getElementById('bodyActions').innerHTML = active.length
-      ? active.map(i => this.actionItemHTML(i, false)).join('')
-      : '<div style="padding:20px;text-align:center;color:var(--ink3);font-family:var(--font-mono);font-size:12px">No action items — inbox is clear</div>';
-
-    // Completed section
-    UI.setCount('countCompleted', completed.length);
-    document.getElementById('bodyCompleted').innerHTML = completed.length
-      ? completed.map(i => this.actionItemHTML(i, true)).join('')
-      : '<div style="padding:20px;text-align:center;color:var(--ink3);font-family:var(--font-mono);font-size:12px">Nothing completed yet</div>';
-
+  // ── Action Items ──
+  actionItems(items) {
+    const active = items.filter(i => !STATE.hasCompleted(i.id));
+    const done   = items.filter(i =>  STATE.hasCompleted(i.id));
+    UI.cnt('cAct', active.length);
+    UI.cnt('cCmp', done.length);
+    document.getElementById('bAct').innerHTML = active.length
+      ? active.map(i => this._actHTML(i, false)).join('')
+      : '<div class="empty-sec">No action items — inbox is clear</div>';
+    document.getElementById('bCmp').innerHTML = done.length
+      ? done.map(i => this._actHTML(i, true)).join('')
+      : '<div class="empty-sec">Nothing completed yet</div>';
     return active.filter(i => i.priority === 'High').length;
   },
 
-  actionItemHTML(item, isCompleted) {
-    const dot = `<div class="priority-dot priority-${item.priority.toLowerCase()}"></div>`;
-    const tag = item.category
-      ? `<span class="action-tag tag-${item.category.toLowerCase()}">${UI.escapeHtml(item.category)}</span>` : '';
-    const jobTag = item.jobRef
-      ? `<span class="action-tag tag-job">${UI.escapeHtml(item.jobRef)}</span>` : '';
-    const draftBtn = item.draftNeeded && !isCompleted
-      ? `<button class="btn-sm btn-draft" onclick='DRAFT.open("${UI.escapeHtml(item.draftTo || '')}","${UI.escapeHtml(item.draftSubject || '')}",${JSON.stringify(item.draftBody || '')})'>Draft Reply</button>` : '';
-
-    return `<div class="action-item ${isCompleted ? 'completed' : ''}" id="action-${item.id}">
-      ${dot}
-      <div class="action-checkbox ${isCompleted ? 'checked' : ''}"
-        onclick="BRIEFING.toggleAction('${item.id}')"></div>
-      <div class="action-content">
-        <div class="action-text">${UI.escapeHtml(item.text)}</div>
-        <div class="action-meta">${tag}${jobTag}</div>
+  _actHTML(i, done) {
+    const catMap = { Admin:'admin', Field:'field', Estimating:'est', Bookkeeping:'bk', Client:'admin' };
+    const priMap = { High:'h', Medium:'m', Low:'l' };
+    const catTag = i.category ? `<span class="tag tag-${catMap[i.category]||'admin'}">${UI.esc(i.category)}</span>` : '';
+    const jobTag = i.jobRef   ? `<span class="tag tag-job">${UI.esc(i.jobRef)}</span>` : '';
+    const draft  = i.draftNeeded && !done
+      ? `<button class="btn-sm btn-draft" onclick='DRAFT.open(${JSON.stringify(i.draftTo||"")},${JSON.stringify(i.draftSubject||"")},${JSON.stringify(i.draftBody||"")})'>Draft Reply</button>` : '';
+    return `<div class="act-item${done?' done':''}" id="ai-${i.id}">
+      <div class="pri-dot pri-${priMap[i.priority]||'m'}"></div>
+      <div class="chk${done?' on':''}" onclick="BRIEFING.togAct('${i.id}')"></div>
+      <div class="act-content">
+        <div class="act-text">${UI.esc(i.text)}</div>
+        <div class="act-meta">${catTag}${jobTag}</div>
       </div>
-      <div class="action-buttons">${draftBtn}</div>
+      <div class="act-btns">${draft}</div>
     </div>`;
   },
 
-  renderBidInvites(bids) {
-    // Filter: KY only, <=130 miles, not already dismissed
-    const filtered = bids.filter(b =>
-      b.state === 'KY' &&
-      b.miles <= CONFIG.MAX_MILES &&
-      !STATE.noBidInvites.has(b.id)
-    );
-    const noBid = bids.filter(b => STATE.noBidInvites.has(b.id));
-
-    UI.setCount('countBids', filtered.length);
-    document.getElementById('bodyBids').innerHTML = filtered.length
-      ? filtered.map(b => this.bidCardHTML(b)).join('')
-      : '<div style="padding:20px;text-align:center;color:var(--ink3);font-family:var(--font-mono);font-size:12px">No qualifying bid invites in this sweep</div>';
-
-    UI.setCount('countNoBid', noBid.length);
-    document.getElementById('bodyNoBid').innerHTML = noBid.length
-      ? noBid.map(b => this.bidCardHTML(b, true)).join('')
-      : '<div style="padding:16px 20px;color:var(--ink3);font-family:var(--font-mono);font-size:12px">No dismissed bids</div>';
-
-    return filtered.length;
-  },
-
-  bidCardHTML(bid, isNoBid = false) {
-    const isFollowing = STATE.followingBids.has(bid.id);
-    const deadline = this.deadlineHTML(bid.bidDate);
-    const scopeNote = STATE.scopeNotes[bid.id] || '';
-    const gcBtn = bid.gcContact
-      ? `<button class="bid-gc-btn" onclick="GC_CARDS.open('${UI.escapeHtml(bid.gcContact)}')">${UI.escapeHtml(bid.gc)} · ${UI.escapeHtml(bid.gcContact)}</button>`
-      : `<span>${UI.escapeHtml(bid.gc)}</span>`;
-
-    const actions = isNoBid ? '' : `
-      <button class="btn-sm btn-follow ${isFollowing ? 'active' : ''}"
-        onclick="BRIEFING.toggleFollow('${bid.id}', ${JSON.stringify(bid)})">
-        ${isFollowing ? '★ Following' : '☆ Follow'}
-      </button>
-      <button class="btn-sm btn-nobid" onclick="BRIEFING.noBid('${bid.id}', '${UI.escapeHtml(bid.project)}')">No Bid</button>
-      ${bid.draftNeeded ? `<button class="btn-sm btn-draft" onclick='DRAFT.open("${UI.escapeHtml(bid.gcEmail || '')}","Re: ${UI.escapeHtml(bid.project)}","")'>Draft Response</button>` : ''}
-    `;
-
-    return `<div class="bid-card ${isFollowing ? 'following' : ''} ${isNoBid ? 'no-bid' : ''}" id="bid-${bid.id}">
-      <div class="bid-header">
-        <div class="bid-title">${UI.escapeHtml(bid.project)}</div>
-        ${deadline}
-      </div>
-      <div class="bid-meta">
-        <span class="bid-meta-item">📍 <strong>${UI.escapeHtml(bid.location)}</strong></span>
-        <span class="bid-meta-item">🚗 ~${bid.miles} mi</span>
-        <span class="bid-meta-item">🏗 ${gcBtn}</span>
-        ${bid.scope ? `<span class="bid-meta-item">📋 ${UI.escapeHtml(bid.scope)}</span>` : ''}
-      </div>
-      ${isFollowing ? `<div class="bid-scope-notes">
-        <textarea placeholder="Scope notes, inclusions/exclusions..." oninput="BRIEFING.saveScopeNote('${bid.id}', this.value)">${UI.escapeHtml(scopeNote)}</textarea>
-      </div>` : ''}
-      <div class="bid-actions">${actions}</div>
-      <select class="nobid-reason" id="nobid-reason-${bid.id}"
-        onchange="BRIEFING.confirmNoBid('${bid.id}', this.value)">
-        <option value="">Select reason...</option>
-        <option value="Out of scope">Out of scope</option>
-        <option value="Too far">Too far</option>
-        <option value="Wrong GC">Wrong GC relationship</option>
-        <option value="No capacity">No capacity</option>
-        <option value="Wrong project type">Wrong project type</option>
-        <option value="Other">Other</option>
-      </select>
-    </div>`;
-  },
-
-  deadlineHTML(bidDate) {
-    if (!bidDate) return '<span class="bid-deadline deadline-unknown">No date</span>';
-    const d = new Date(bidDate);
-    if (isNaN(d)) return '<span class="bid-deadline deadline-unknown">TBD</span>';
-    const days = Math.ceil((d - Date.now()) / (1000*60*60*24));
-    if (days < 0)  return `<span class="bid-deadline deadline-urgent">Passed</span>`;
-    if (days <= 7) return `<span class="bid-deadline deadline-urgent">⚠ ${days}d left</span>`;
-    if (days <= 14) return `<span class="bid-deadline deadline-soon">${days}d left</span>`;
-    return `<span class="bid-deadline deadline-ok">${days}d · ${d.toLocaleDateString('en-US',{month:'short',day:'numeric'})}</span>`;
-  },
-
-  renderAmendments(items) {
-    UI.setCount('countAmendments', items.length);
-    document.getElementById('bodyAmendments').innerHTML = items.length
-      ? items.map(a => `
-        <div class="amendment-item">
-          <div class="amendment-dot"></div>
-          <div class="amendment-content">
-            <div class="amendment-title">${UI.escapeHtml(a.title)}</div>
-            <div class="amendment-detail">${UI.escapeHtml(a.solicitation)} · ${UI.escapeHtml(a.detail)} · From: ${UI.escapeHtml(a.from)}</div>
-          </div>
-          <div class="amendment-actions">
-            <button class="btn-sm btn-seen" onclick="this.closest('.amendment-item').style.opacity='0.4'">Seen</button>
-          </div>
-        </div>`).join('')
-      : '<div style="padding:16px 20px;color:var(--ink3);font-family:var(--font-mono);font-size:12px">No amendments in this sweep</div>';
-  },
-
-  renderMaterials(items) {
-    const icons = { delivery: '📦', order: '🛒', quote: '💬', backorder: '⚠️' };
-    UI.setCount('countMaterials', items.length);
-    document.getElementById('bodyMaterials').innerHTML = items.length
-      ? items.map(m => `
-        <div class="material-item">
-          <div class="material-icon">${icons[m.type] || '📋'}</div>
-          <div class="material-content">
-            <div class="material-text">${UI.escapeHtml(m.text)}</div>
-            <div class="material-meta">${UI.escapeHtml(m.type)} ${m.jobRef ? '· ' + UI.escapeHtml(m.jobRef) : ''}</div>
-          </div>
-        </div>`).join('')
-      : '<div style="padding:16px 20px;color:var(--ink3);font-family:var(--font-mono);font-size:12px">No materials or deliveries flagged</div>';
-  },
-
-  renderJobFlags(flags) {
-    const active = flags.filter(f => !STATE.acknowledgedFlags.has(f.id));
-    UI.setCount('countFlags', active.length);
-    document.getElementById('bodyFlags').innerHTML = active.length
-      ? active.map(f => `
-        <div class="flag-item" id="flag-${f.id}">
-          <div class="flag-bar"></div>
-          <div class="flag-content">
-            <div class="flag-job">${UI.escapeHtml(f.job)}</div>
-            <div class="flag-text">${UI.escapeHtml(f.flag)}</div>
-            <div class="flag-suggested">Suggested: ${UI.escapeHtml(f.suggestedUpdate)}</div>
-            <div class="flag-actions">
-              <button class="btn-sm btn-apply" onclick="BRIEFING.applyFlag('${f.id}')">Apply Update</button>
-              <button class="btn-sm btn-ack" onclick="BRIEFING.ackFlag('${f.id}')">Acknowledge</button>
-            </div>
-          </div>
-        </div>`).join('')
-      : '<div style="padding:16px 20px;color:var(--ink3);font-family:var(--font-mono);font-size:12px">No tracker updates needed</div>';
+  // ── Bid Invites ──
+  bidInvites(bids) {
+    const active = bids.filter(b => b.state==='KY' && b.miles<=130 && !STATE.hasNoBid(b.id));
+    const noBid  = bids.filter(b => STATE.hasNoBid(b.id));
+    UI.cnt('cBid', active.length);
+    UI.cnt('cNB',  noBid.length);
+    document.getElementById('bBid').innerHTML = active.length
+      ? active.map(b => this._bidHTML(b, false)).join('')
+      : '<div class="empty-sec">No qualifying bid invites in this sweep</div>';
+    document.getElementById('bNB').innerHTML = noBid.length
+      ? noBid.map(b => this._bidHTML(b, true)).join('')
+      : '<div class="empty-sec">No dismissed bids</div>';
     return active.length;
   },
 
-  renderNoise(items) {
-    UI.setCount('countNoise', items.length);
-    document.getElementById('bodyNoise').innerHTML = items.length
+  _bidHTML(b, isNoBid) {
+    const following = STATE.hasFollowing(b.id);
+    const scope     = STATE.scopeNotes[b.id] || '';
+    const gcBtn     = b.gcContact
+      ? `<button class="gc-link" onclick="GC.open('${UI.esc(b.gcContact)}')">${UI.esc(b.gc)} · ${UI.esc(b.gcContact)}</button>`
+      : `<span>${UI.esc(b.gc)}</span>`;
+    const acts = isNoBid ? '' : `
+      <button class="btn-sm btn-follow${following?' on':''}" onclick="BRIEFING.togFollow('${b.id}',${JSON.stringify(b)})">${following?'★ Following':'☆ Follow'}</button>
+      <button class="btn-sm btn-nobid" onclick="BRIEFING.showNBR('${b.id}')">No Bid</button>
+      ${b.draftNeeded?`<button class="btn-sm btn-draft" onclick='DRAFT.open(${JSON.stringify(b.gcEmail||"")},${JSON.stringify("Re: "+(b.project||""))},${JSON.stringify("")})'>Draft</button>`:''}
+      <select class="nbr" id="nbr-${b.id}" onchange="BRIEFING.confirmNB('${b.id}',this.value)">
+        <option value="">Select reason...</option>
+        <option>Out of scope</option><option>Too far</option>
+        <option>Wrong GC</option><option>No capacity</option>
+        <option>Wrong project type</option><option>Other</option>
+      </select>`;
+    return `<div class="bid-card${following?' following':''}" id="bc-${b.id}">
+      <div class="bid-hdr">
+        <div class="bid-title">${UI.esc(b.project)}</div>
+        ${this._dlHTML(b.bidDate)}
+      </div>
+      <div class="bid-meta">
+        <span class="bid-mi">📍 <strong>${UI.esc(b.location)}</strong></span>
+        <span class="bid-mi">🚗 ~${b.miles} mi</span>
+        <span class="bid-mi">🏗 ${gcBtn}</span>
+        ${b.scope?`<span class="bid-mi">📋 ${UI.esc(b.scope)}</span>`:''}
+      </div>
+      ${following?`<div class="scope-notes"><textarea placeholder="Scope notes, inclusions/exclusions..." oninput="STATE.scopeNotes['${b.id}']=this.value;STATE.save()">${UI.esc(scope)}</textarea></div>`:''}
+      <div class="bid-acts">${acts}</div>
+    </div>`;
+  },
+
+  _dlHTML(d) {
+    if (!d) return '<span class="dl dl-unk">No date</span>';
+    const dt = new Date(d);
+    if (isNaN(dt)) return '<span class="dl dl-unk">TBD</span>';
+    const days = Math.ceil((dt - Date.now()) / 864e5);
+    if (days < 0)   return '<span class="dl dl-urg">Passed</span>';
+    if (days <= 7)  return `<span class="dl dl-urg">⚠ ${days}d left</span>`;
+    if (days <= 14) return `<span class="dl dl-soon">${days}d left</span>`;
+    return `<span class="dl dl-ok">${days}d · ${dt.toLocaleDateString('en-US',{month:'short',day:'numeric'})}</span>`;
+  },
+
+  // ── Amendments ──
+  amendments(items) {
+    UI.cnt('cAmd', items.length);
+    document.getElementById('bAmd').innerHTML = items.length
+      ? items.map(a => `<div class="amd-item">
+          <div class="amd-dot"></div>
+          <div class="amd-content">
+            <div class="amd-title">${UI.esc(a.title)}</div>
+            <div class="amd-detail">${UI.esc(a.solicitation)} · ${UI.esc(a.detail)} · From: ${UI.esc(a.from)}</div>
+          </div>
+          <div><button class="btn-sm btn-seen" onclick="this.closest('.amd-item').style.opacity='.4'">Seen</button></div>
+        </div>`).join('')
+      : '<div class="empty-sec">No amendments in this sweep</div>';
+  },
+
+  // ── Materials ──
+  materials(items) {
+    const icons = { delivery:'📦', order:'🛒', quote:'💬', backorder:'⚠️' };
+    UI.cnt('cMat', items.length);
+    document.getElementById('bMat').innerHTML = items.length
+      ? items.map(m => `<div class="mat-item">
+          <div class="mat-icon">${icons[m.type]||'📋'}</div>
+          <div class="mat-content">
+            <div class="mat-text">${UI.esc(m.text)}</div>
+            <div class="mat-meta">${UI.esc(m.type)}${m.jobRef?' · '+UI.esc(m.jobRef):''}</div>
+          </div>
+        </div>`).join('')
+      : '<div class="empty-sec">No materials or deliveries flagged</div>';
+  },
+
+  // ── Job Tracker Flags ──
+  flags(items) {
+    const active = items.filter(f => !BRIEFING._acked.includes(f.id));
+    UI.cnt('cFlg', active.length);
+    document.getElementById('bFlg').innerHTML = active.length
+      ? active.map(f => `<div class="flag-item" id="fi-${f.id}">
+          <div class="flag-bar"></div>
+          <div class="flag-content">
+            <div class="flag-job">${UI.esc(f.job)}</div>
+            <div class="flag-text">${UI.esc(f.flag)}</div>
+            <div class="flag-sug">Suggested: ${UI.esc(f.suggestedUpdate)}</div>
+            <div class="flag-acts">
+              <button class="btn-sm btn-apply" onclick="BRIEFING.applyFlg('${f.id}')">Apply Update</button>
+              <button class="btn-sm btn-ack" onclick="BRIEFING.ackFlg('${f.id}')">Acknowledge</button>
+            </div>
+          </div>
+        </div>`).join('')
+      : '<div class="empty-sec">No tracker updates needed</div>';
+    return active.length;
+  },
+
+  // ── Noise ──
+  noise(items) {
+    UI.cnt('cNoise', items.length);
+    document.getElementById('bNoise').innerHTML = items.length
       ? `<div class="noise-list">${items.map(n =>
-          `<div class="noise-item">
-            <span class="noise-from">${UI.escapeHtml(n.from)}</span>
-            <span>${UI.escapeHtml(n.subject)}</span>
-          </div>`).join('')
-        }</div>`
-      : '<div style="padding:16px 20px;color:var(--ink3);font-family:var(--font-mono);font-size:12px">No noise</div>';
+          `<div class="noise-item"><span class="noise-from">${UI.esc(n.from)}</span><span>${UI.esc(n.subject)}</span></div>`
+        ).join('')}</div>`
+      : '<div class="empty-sec">No noise</div>';
   }
 };
 
-/* ── MODULE: BRIEFING (orchestrator) ─────────────────────── */
+// ══════════════════════════════════════════════════════
+// MODULE: GC CARDS
+// ══════════════════════════════════════════════════════
+const GC = {
+  // Known contacts — pre-loaded, can be extended
+  contacts: [
+    { company:'Trace Creek Construction', firstName:'Zach', lastName:'Duncan', role:'Project Manager', phone:'(606) 497-0258', email:'zduncan@tracecreek.net', notes:'' },
+    { company:'Denham Blythe', firstName:'Hayden', lastName:'Dickens', role:'Assistant Project Manager', phone:'270-816-6384', email:'hdickens@denhamblythe.com', notes:'' },
+    { company:'Denham Blythe', firstName:'Kelli', lastName:'Peterson', role:'Project Manager', phone:'', email:'kpeterson@denhamblythe.com', notes:'' },
+    { company:'Allen Construction', firstName:'Ryan', lastName:'Eldridge', role:'Estimator', phone:'', email:'ryan@allenconstructs.com', notes:'' },
+    { company:'Total Systems Commissioning', firstName:'Phillip', lastName:'Sparks', role:'Project Manager, CxA', phone:'', email:'psparks@tscx.org', notes:'' },
+    { company:'Stoermer Anderson', firstName:'Christian', lastName:'Tipton', role:'Technical Sales / PM', phone:'513-444-8345', email:'cet@stoermer-anderson.com', notes:'' },
+    { company:'Building & Repair Systems', firstName:'Davis', lastName:'Anderton', role:'Project Manager', phone:'615-483-9804', email:'davis.anderton@buildingrepair.systems', notes:'' },
+  ],
+  current: null,
+
+  open(nameOrCo) {
+    const c = this.contacts.find(x =>
+      (`${x.firstName} ${x.lastName}`).trim() === nameOrCo ||
+      x.company === nameOrCo ||
+      x.email.toLowerCase() === nameOrCo.toLowerCase()
+    ) || { company: nameOrCo, firstName: nameOrCo, lastName: '', role: '', phone: '—', email: '—', notes: '' };
+
+    this.current = c;
+    const fn = (`${c.firstName} ${c.lastName}`).trim();
+
+    document.getElementById('gcCo').textContent   = c.company;
+    document.getElementById('gcName').textContent = fn || c.company;
+    document.getElementById('gcRole').textContent = c.role;
+    document.getElementById('gcPhone').textContent = c.phone || '—';
+    document.getElementById('gcEmail').innerHTML = c.email && c.email !== '—'
+      ? `<a href="mailto:${UI.esc(c.email)}">${UI.esc(c.email)}</a>` : '—';
+
+    // Load saved notes
+    const savedNotes = STATE.gcNotes[fn] || c.notes || '';
+    document.getElementById('gcNotes').value = savedNotes;
+
+    // Linked jobs / bids — show link to tracker
+    document.getElementById('gcJobs').innerHTML =
+      `<p style="font-family:var(--font-m);font-size:12px;color:var(--ink3)">See <a href="${CONFIG.sheetId ? 'https://docs.google.com/spreadsheets/d/'+CONFIG.sheetId : '#'}" target="_blank">job tracker</a> for active jobs with ${UI.esc(c.company)}</p>`;
+    document.getElementById('gcBids').innerHTML =
+      `<p style="font-family:var(--font-m);font-size:12px;color:var(--ink3)">See <a href="${CONFIG.sheetId ? 'https://docs.google.com/spreadsheets/d/'+CONFIG.sheetId : '#'}" target="_blank">bid pipeline</a> for active bids with ${UI.esc(c.company)}</p>`;
+
+    document.getElementById('gcModal').classList.add('on');
+  },
+
+  close()     { document.getElementById('gcModal').classList.remove('on'); },
+  closeOvl(e) { if (e.target.id === 'gcModal') this.close(); },
+
+  saveNotes() {
+    if (!this.current) return;
+    const fn    = (`${this.current.firstName} ${this.current.lastName}`).trim() || this.current.company;
+    const notes = document.getElementById('gcNotes').value;
+    STATE.gcNotes[fn] = notes;
+    STATE.save();
+    const btn = document.querySelector('#gcModal .modal-save');
+    btn.textContent = 'Saved ✓';
+    setTimeout(() => { btn.textContent = 'Save Notes'; }, 1400);
+  }
+};
+
+// ══════════════════════════════════════════════════════
+// MODULE: DRAFT EMAIL
+// ══════════════════════════════════════════════════════
+const DRAFT = {
+  open(to, subject, body) {
+    document.getElementById('dTo').value    = to      || '';
+    document.getElementById('dSub').value   = subject || '';
+    document.getElementById('dBody').value  = body    || '';
+    document.getElementById('draftModal').classList.add('on');
+  },
+  close()     { document.getElementById('draftModal').classList.remove('on'); },
+  closeOvl(e) { if (e.target.id === 'draftModal') this.close(); },
+  copy() {
+    const t = `To: ${document.getElementById('dTo').value}\nSubject: ${document.getElementById('dSub').value}\n\n${document.getElementById('dBody').value}`;
+    navigator.clipboard.writeText(t).then(() => {
+      const b = document.querySelector('#draftModal .btn-copy');
+      b.textContent = 'Copied ✓';
+      setTimeout(() => { b.textContent = 'Copy'; }, 1400);
+    });
+  },
+  openGmail() {
+    const to  = encodeURIComponent(document.getElementById('dTo').value);
+    const sub = encodeURIComponent(document.getElementById('dSub').value);
+    const bod = encodeURIComponent(document.getElementById('dBody').value);
+    window.open(`https://mail.google.com/mail/?view=cm&to=${to}&su=${sub}&body=${bod}`, '_blank');
+  }
+};
+
+// ══════════════════════════════════════════════════════
+// MODULE: SETUP
+// ══════════════════════════════════════════════════════
+const SETUP = {
+  open() {
+    document.getElementById('setupKey').value   = CONFIG.claudeKey;
+    document.getElementById('setupEmail').value = CONFIG.gmailAddress;
+    document.getElementById('setupSheet').value = CONFIG.sheetId;
+    document.getElementById('setupHours').value = String(CONFIG.sweepHours);
+    document.getElementById('setupModal').classList.add('on');
+  },
+  close()     { document.getElementById('setupModal').classList.remove('on'); },
+  closeOvl(e) { if (e.target.id === 'setupModal') this.close(); },
+  save() {
+    const key   = document.getElementById('setupKey').value.trim();
+    const email = document.getElementById('setupEmail').value.trim();
+    const sheet = document.getElementById('setupSheet').value.trim();
+    const hours = parseInt(document.getElementById('setupHours').value) || 24;
+    if (!key) { alert('Please enter your Claude API key.'); return; }
+    CONFIG.save(key, email, sheet, hours);
+    // Update sheet link
+    if (sheet) document.getElementById('sheetLink').href = 'https://docs.google.com/spreadsheets/d/' + sheet;
+    this.close();
+    UI.warn('');
+  }
+};
+
+// ══════════════════════════════════════════════════════
+// MODULE: BRIEFING (main orchestrator)
+// ══════════════════════════════════════════════════════
 const BRIEFING = {
-  lastResult: null,
+  result:  null,
+  _acked:  [],
 
   async run() {
-    if (!CONFIG.isConfigured()) {
+    if (!CONFIG.isReady()) {
+      UI.warn('⚠ Claude API key not set — click ⚙ Setup to add it.');
       SETUP.open();
       return;
     }
 
-    const btn = document.getElementById('runBtn');
-    btn.classList.add('running');
-    btn.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:14px;height:14px;animation:spin 1s linear infinite"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg> Scanning...`;
-
-    // Add spin animation
-    if (!document.getElementById('spinStyle')) {
-      const s = document.createElement('style');
-      s.id = 'spinStyle';
-      s.textContent = '@keyframes spin { to { transform: rotate(360deg); } }';
-      document.head.appendChild(s);
-    }
+    UI.warn('');
+    document.getElementById('runBtn').classList.add('running');
+    UI.spinStart();
+    UI.prog(15, 'Connecting to Claude...');
+    UI.status('Scanning Gmail...');
 
     try {
-      UI.setProgress(10, 'Signing in to Google...');
-      await AUTH.getToken();
+      UI.prog(35, 'Claude is reading your Gmail...');
+      const result = await CLAUDE.sweep(STATE.lastSweepTime);
 
-      UI.setProgress(25, 'Fetching emails since last sweep...');
-      const emails = await GMAIL.fetchEmailsSince(STATE.lastSweepTime);
-      UI.setSweepStatus(`Found ${emails.length} new emails`);
+      UI.prog(80, 'Building your briefing...');
+      this.result = result;
 
-      if (emails.length === 0) {
-        UI.setProgress(100, 'No new emails since last sweep');
-        UI.clearProgress();
+      if (!result.emailCount || result.emailCount === 0) {
+        UI.clearProg();
+        UI.status('No new emails since last sweep — inbox is current');
         UI.showReport();
-        UI.setSweepStatus('No new emails — inbox is current');
-        btn.classList.remove('running');
-        btn.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg> Run Sweep`;
+        this._render(result);
         return;
       }
 
-      UI.setProgress(50, `Analyzing ${emails.length} emails with Claude...`);
-      const result = await CLAUDE_API.analyze(emails);
-      this.lastResult = result;
+      this._render(result);
 
-      UI.setProgress(80, 'Building report...');
-
-      const highCount = RENDERER.renderActionItems(result.actionItems || []);
-      const bidCount  = RENDERER.renderBidInvites(result.bidInvites || []);
-      const flagCount = RENDERER.renderJobFlags(result.jobTrackerFlags || []);
-      RENDERER.renderAmendments(result.amendments || []);
-      RENDERER.renderMaterials(result.materialFlags || []);
-      RENDERER.renderNoise(result.noise || []);
-
-      // Update sweep time
       STATE.lastSweepTime = new Date().toISOString();
       STATE.save();
 
-      UI.setProgress(100, 'Briefing ready');
-      setTimeout(() => UI.clearProgress(), 800);
-      UI.showReport();
-      UI.updateBadges(highCount, bidCount, flagCount);
-
-      const now = new Date().toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
-      UI.setSweepStatus(`Last sweep: today at ${now} · ${emails.length} emails scanned`);
+      const now = new Date().toLocaleTimeString('en-US', { hour:'numeric', minute:'2-digit' });
+      UI.status(`Last sweep: today at ${now} · ${result.emailCount} emails scanned`);
+      setTimeout(() => UI.clearProg(), 700);
 
     } catch(err) {
       console.error('Sweep error:', err);
-      UI.clearProgress();
-      UI.setSweepStatus(`Error: ${err.message}`);
-      alert(`Sweep failed: ${err.message}\n\nCheck your API keys in Setup.`);
-    }
-
-    btn.classList.remove('running');
-    btn.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg> Run Sweep`;
-  },
-
-  toggleAction(id) {
-    if (STATE.completedActions.has(id)) {
-      STATE.completedActions.delete(id);
-    } else {
-      STATE.completedActions.add(id);
-    }
-    STATE.save();
-    // Re-render action items
-    if (this.lastResult) {
-      RENDERER.renderActionItems(this.lastResult.actionItems || []);
+      UI.clearProg();
+      UI.status('Sweep failed — see warning');
+      UI.warn(`⚠ Sweep failed: ${err.message}. Check your Claude API key in Setup.`);
+    } finally {
+      document.getElementById('runBtn').classList.remove('running');
+      UI.spinStop();
     }
   },
 
-  toggleFollow(id, bidData) {
-    if (STATE.followingBids.has(id)) {
-      STATE.followingBids.delete(id);
-    } else {
-      STATE.followingBids.add(id);
-      // Add to Bid Pipeline in Google Sheet
-      SHEETS.addBidToPipeline(bidData).catch(e => console.warn('Sheet bid add:', e));
-    }
-    STATE.save();
-    if (this.lastResult) RENDERER.renderBidInvites(this.lastResult.bidInvites || []);
+  _render(result) {
+    UI.showReport();
+    const h = R.actionItems(result.actionItems   || []);
+    const b = R.bidInvites(result.bidInvites     || []);
+    const f = R.flags(result.jobTrackerFlags     || []);
+    R.amendments(result.amendments  || []);
+    R.materials(result.materialFlags || []);
+    R.noise(result.noise            || []);
+    UI.badges(h, b, f);
   },
 
-  noBid(id, projectName) {
-    const select = document.getElementById(`nobid-reason-${id}`);
-    if (select) select.classList.toggle('visible');
+  togAct(id) {
+    STATE.hasCompleted(id) ? STATE.uncomplete(id) : STATE.complete(id);
+    if (this.result) R.actionItems(this.result.actionItems || []);
   },
 
-  confirmNoBid(id, reason) {
+  togFollow(id, bid) {
+    if (STATE.hasFollowing(id)) { STATE.unfollow(id); }
+    else { STATE.follow(id); }
+    if (this.result) R.bidInvites(this.result.bidInvites || []);
+  },
+
+  showNBR(id) {
+    const el = document.getElementById('nbr-' + id);
+    if (el) el.classList.toggle('on');
+  },
+
+  confirmNB(id, reason) {
     if (!reason) return;
-    STATE.noBidInvites.add(id);
-    STATE.noBidReasons[id] = reason;
-    STATE.save();
-    if (this.lastResult) RENDERER.renderBidInvites(this.lastResult.bidInvites || []);
+    STATE.noBid(id, reason);
+    if (this.result) R.bidInvites(this.result.bidInvites || []);
   },
 
-  saveScopeNote(id, text) {
-    STATE.scopeNotes[id] = text;
-    STATE.save();
+  applyFlg(id) {
+    if (CONFIG.sheetId) window.open('https://docs.google.com/spreadsheets/d/' + CONFIG.sheetId, '_blank');
+    this.ackFlg(id);
   },
 
-  ackFlag(id) {
-    STATE.acknowledgedFlags.add(id);
-    STATE.save();
-    const el = document.getElementById(`flag-${id}`);
-    if (el) { el.style.opacity = '0.4'; el.style.pointerEvents = 'none'; }
-    UI.setCount('countFlags', document.querySelectorAll('.flag-item:not([style*="opacity"])').length);
-  },
-
-  applyFlag(id) {
-    // Opens the Google Sheet so user can apply the update
-    if (CONFIG.sheetId) {
-      window.open(`https://docs.google.com/spreadsheets/d/${CONFIG.sheetId}`, '_blank');
-    }
-    this.ackFlag(id);
+  ackFlg(id) {
+    if (!this._acked.includes(id)) this._acked.push(id);
+    const el = document.getElementById('fi-' + id);
+    if (el) { el.style.opacity = '.35'; el.style.pointerEvents = 'none'; }
   }
 };
 
-/* ── INIT ─────────────────────────────────────────────────── */
+// ══════════════════════════════════════════════════════
+// INIT
+// ══════════════════════════════════════════════════════
 (function init() {
-  THEME.init();
+  CONFIG.load();
   STATE.load();
-  const configured = CONFIG.load();
-  if (configured) {
-    document.getElementById('setupBanner').style.display = 'none';
+  THEME.init();
+
+  // Set sheet link if configured
+  if (CONFIG.sheetId) {
+    document.getElementById('sheetLink').href = 'https://docs.google.com/spreadsheets/d/' + CONFIG.sheetId;
   }
 
-  // Pre-fill setup fields
-  if (CONFIG.isConfigured()) {
-    document.getElementById('setupClaudeKey').value = CONFIG.claudeKey;
-    document.getElementById('setupGoogleClientId').value = CONFIG.googleClientId;
-    document.getElementById('setupSheetId').value = CONFIG.sheetId;
+  // Show setup prompt if not configured
+  if (!CONFIG.isReady()) {
+    UI.warn('⚠ Welcome! Click ⚙ Setup to enter your Claude API key and get started.');
   }
 })();
 </script>
-
-<!-- Google Identity Services (loaded async) -->
-<script src="https://accounts.google.com/gsi/client" async defer></script>
-
 </body>
 </html>
