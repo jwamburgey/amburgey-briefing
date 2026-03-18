@@ -447,9 +447,9 @@ input:focus,textarea:focus,select:focus{outline:none;border-color:var(--accent)}
       <div class="setup-step">
         <div class="setup-step-hdr">
           <div class="setup-step-num">4</div>
-          <div class="setup-step-title">Sweep Window</div>
+          <div class="setup-step-title">First Sweep Window</div>
         </div>
-        <p>How many hours back to scan on each sweep.</p>
+        <p>How far back to scan on your <strong>first</strong> sweep only. After that, each sweep automatically picks up only emails since the last run.</p>
         <select id="setupHours">
           <option value="12">Last 12 hours</option>
           <option value="24" selected>Last 24 hours</option>
@@ -639,13 +639,15 @@ const UI = {
 // ══════════════════════════════════════════════════════
 const CLAUDE = {
   async sweep(sinceIso) {
-    const since = sinceIso
-      ? new Date(sinceIso).toISOString().split('T')[0].replace(/-/g,'/')
-      : new Date(Date.now() - CONFIG.sweepHours * 3600000).toISOString().split('T')[0].replace(/-/g,'/');
+    const sinceDate = sinceIso
+      ? new Date(sinceIso)
+      : new Date(Date.now() - CONFIG.sweepHours * 3600000);
+    const since = sinceDate.toISOString().split('T')[0].replace(/-/g,'/');
+    const sinceTimestamp = sinceDate.toISOString();
 
     const prompt = `You are helping Jordan Amburgey, VP of Don Amburgey's Plumbing, Heating & Mechanical in Mallie, KY (Letcher County) — a small commercial mechanical contractor with 6 tradesmen. Focus: schools, hospitals, judicial centers. Key GCs: Trace Creek (Zach Duncan), Denham Blythe (Hayden Dickens, Kelli Peterson), Allen Construction (Ryan Eldridge), Churchill McGee, Devere Construction.
 
-TASK: Use the Gmail tool to search for emails after:${since} in ${CONFIG.gmailAddress}. Fetch up to 40 messages. Exclude: LinkedIn notifications, promotional emails, order confirmations, NETGEAR, Advance Auto Parts.
+TASK: Use the Gmail tool to search for emails after:${since} in ${CONFIG.gmailAddress}. Fetch up to 40 messages. Only include emails received AFTER ${sinceTimestamp} (ignore anything before this exact timestamp). Exclude: LinkedIn notifications, promotional emails, order confirmations, NETGEAR, Advance Auto Parts.
 
 After reading the emails, analyze them and return ONLY a valid JSON object with this exact structure:
 
@@ -1047,7 +1049,10 @@ const BRIEFING = {
     document.getElementById('runBtn').classList.add('running');
     UI.spinStart();
     UI.prog(15, 'Connecting to Claude...');
-    UI.status('Scanning Gmail...');
+    const sweepLabel = STATE.lastSweepTime
+      ? `Scanning emails since last sweep (${new Date(STATE.lastSweepTime).toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'})} yesterday)...`
+      : `Scanning last ${CONFIG.sweepHours} hours of Gmail...`;
+    UI.status(sweepLabel);
 
     try {
       UI.prog(35, 'Claude is reading your Gmail...');
@@ -1058,7 +1063,10 @@ const BRIEFING = {
 
       if (!result.emailCount || result.emailCount === 0) {
         UI.clearProg();
-        UI.status('No new emails since last sweep — inbox is current');
+        const sinceMsg = STATE.lastSweepTime
+          ? `No new emails since last sweep at ${new Date(STATE.lastSweepTime).toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'})}`
+          : 'No new emails found';
+        UI.status(sinceMsg + ' — inbox is current');
         UI.showReport();
         this._render(result);
         return;
